@@ -82,14 +82,7 @@ class Leader extends DataBaseConnection {
 
             $stmt->execute([$cleaned_pass]);
 
-            if ($stmt->rowCount()) {
-                while ($row = $stmt->fetch()) {
-                    $this->leaderUserName = $row['leader_username'];
-                    return $this->leaderUserName;
-                }
-            } else {
-                return NO_MATCH_FOUND;
-            }
+            return $stmt->rowCount() ? true : false;
         } else {
             return false;
         }
