@@ -58,12 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $leaderObj = new Leader();
 
             // If leader username exists
-            if ($leaderObj->getLeaderUserName($user_name) != NO_MATCH_FOUND) {
+            if ($leaderObj->getLeaderUserNameIfExists($user_name) != NO_MATCH_FOUND) {
                 // Verify password
-                if ($leaderObj->verifyLeader($pass)) {
+                if ($leaderObj->verifyLeader($user_name, $pass)) {
                     // Set session variables
-                    $_SESSION['user'] = $leaderObj->getLeaderUserName($user_name);
-                    $_SESSION['leader_has_Team'] = $leaderObj->getLeaderTeamId($user_name);
+                    $_SESSION['user'] = $leaderObj->getLeaderUserNameIfExists($user_name);
+                    $lead_team_id = $leaderObj->getLeaderTeamId($user_name);
+                    if (!empty($lead_team_id)) {
+                        $_SESSION['leader_has_Team'] = $lead_team_id;
+                    }
                     $_SESSION['user_type'] = "leader";
 
                     // Redirect the user
@@ -79,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $loginErrorMesg = $user_name . " is not registered,<br>Please $sign_up_str";
             }
         } // End of if no empty user input
-
 
     } // End of if POST = submit
     else {

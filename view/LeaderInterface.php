@@ -20,7 +20,7 @@
     $leaderObj = new Leader();
     if (isset($_SESSION['leader_has_Team'])){
         $leader_has_team = true;
-        $leaderTeamId =$_SESSION['leader_has_Team'];
+        $leaderTeamId = empty($_SESSION['leader_has_Team']);
     } else {
         $leader_has_team = false;
     }
@@ -51,12 +51,16 @@
             echo "Display Team Table here, use leader team id to get Team information from db";
         } else { // Display registration
             echo "
-                <div class=\" flip-display-icon flip-icon-container flip-col l1 flip-center space-l-5-half space-m-5-half\">
-                <img class=\"flip-circle flip-card-4 flip-icon-image\" src=\"../images/volleball-ball.jpeg\" ></a>
-                <div class=\"flip-icon-middle\">
-                    <a href=\"VolleyBallSignUp.php\" class=\"flip-icon-middle-text\">Sign Up</a>
+                <p class='flip-clear flip-small flip-bold'>Select sport to sign up your Team. </p>
+                
+                <!-- ---- To add new icon copy this portion and make changes accordingly ---- -->
+                <div class=\"flip-icon-container flip-col l1 flip-center space-l-5-half space-m-5-half\">
+                    <img class=\"flip-circle flip-card-4 flip-icon-image\" src=\"../images/volleball-ball.jpeg\"  alt=\"Volleyball ball\"></a>
+                    <div class=\"flip-icon-middle\">
+                        <a href=\"VolleyBallSignUp.php\" class=\"flip-icon-middle-text\">Sign Up</a>
+                    </div>
                 </div>
-                </div> 
+                <!-- ---------------------- End of icon link portion ------------------------ -->
                 ";
         } ?>
 
