@@ -1,6 +1,6 @@
 <?php
 /**
- * Project: ics499_project
+ * Project: ics499_project project-definition
  *
  * Initial version by: Franklin Ortega.
  * Initial version on: 2019-02-19 16:24
