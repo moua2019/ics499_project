@@ -1,6 +1,6 @@
 <?php
 /**
- * Project: ics499_project project-definition
+ * Project: ics499_project
  *
  * Initial version by: Franklin Ortega.
  * Initial version on: 2019-02-19 16:24
@@ -11,6 +11,7 @@
 include "../model/DataBaseConnection.php";
 include "../model/CreateUniqueId.php";
 include "../model/User.php";
+
 
 define("NO_MATCH_FOUND", "No match found");
 define("USER_NAME_TAKEN", DUPLICATE_KEY_ENTRY);
