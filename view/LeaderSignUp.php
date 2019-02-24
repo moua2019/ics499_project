@@ -51,7 +51,7 @@ if (isset($_POST))
 }
 echo"
     <div class=\"flip-content flip-container flip-centered flip-col l4 space-l-4 m6 space-m-3 flip-card-4 flip-margin-bottom\" >
-        <div class=\"flip-container flip-col l12 \">
+        <div class=\"flip-container flip-col l12 m12 s12\">
             <h2 class='flip-center'>Sign Up</h2>
             <form action='LeaderSignUp.php' method='post' >
                 <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"First Name\" required name=\"fName\"></p>

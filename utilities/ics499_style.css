@@ -100,6 +100,9 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .flip-col.s1{width:8.33333%}.flip-col.s2{width:16.66666%}.flip-col.s3{width:24.99999%}.flip-col.s4{width:33.33333%}
 .flip-col.s5{width:41.66666%}.flip-col.s6{width:49.99999%}.flip-col.s7{width:58.33333%}.flip-col.s8{width:66.66666%}
 .flip-col.s9{width:74.99999%}.flip-col.s10{width:83.33333%}.flip-col.s11{width:91.66666%}.flip-col.s12{width:99.99999%}
+.flip-col.space-s-1 {margin-left: 8.33333% !important;}.flip-col.space-s-2 {margin-left: 16.66666% !important;}  .flip-col.space-s-2-and-half {margin-left: 20.833325% !important;}  .flip-col.space-s-3, .flip-quarter-space {margin-left: 24.99999% !important;}  .flip-col.space-s-3-and-half {margin-left: 29.166665% !important;}
+.flip-col.space-s-4, .flip-third-space {margin-left: 33.33333% !important;}  .flip-col.space-s-5 {margin-left: 41.66666% !important;} .flip-col.space-s-5-half {margin-left: 45.83332% !important;}  .flip-col.space-s-6, .flip-half-space {margin-left: 49.99999% !important;}  .flip-col.space-s-7 {margin-left: 58.33333% !important;} .flip-quarter {margin-left: 25% !important;}
+.flip-col.space-s-8, .flip-two-third-space {margin-left: 66.66666% !important;}  .flip-col.space-s-9, .flip-three-qtr-space {margin-left: 74.99999% !important;}  .flip-col.space-s-10 {margin-left: 83.33333% !important;}  .flip-col.space-s-11 {margin-left: 91.66666% !important;} .flip-col.space-s-full {margin-left: 99.99999% !important}
 @media (min-width:601px){.flip-col.m1{width:8.33333%}.flip-col.m2{width:16.66666%}.flip-col.m3,.flip-quarter{width:24.99999%}.flip-col.m4,.flip-third{width:33.33333%}
     .flip-col.m5{width:41.66666%}.flip-col.m6,.flip-half{width:49.99999%}.flip-col.m7{width:58.33333%}.flip-col.m8,.flip-twothird{width:66.66666%}.flip-quarter {margin-left: 25% !important;}
     .flip-col.m9,.flip-threequarter{width:74.99999%}.flip-col.m10{width:83.33333%}.flip-col.m11{width:91.66666%}.flip-col.m12{width:99.99999%}}
@@ -120,6 +123,13 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     .flip-dropdown-hover.flip-mobile .flip-dropdown-content,.flip-dropdown-click.flip-mobile .flip-dropdown-content{position:relative}
     .flip-hide-small{display:none!important}.flip-mobile{display:block;width:100%!important}.flip-bar-item.flip-mobile,.flip-dropdown-hover.flip-mobile,.flip-dropdown-click.flip-mobile{text-align:center}.flip-quarter {margin-left: 25% !important;}
     .flip-dropdown-hover.flip-mobile,.flip-dropdown-hover.flip-mobile .flip-btn,.flip-dropdown-hover.flip-mobile .flip-button,.flip-dropdown-click.flip-mobile,.flip-dropdown-click.flip-mobile .flip-btn,.flip-dropdown-click.flip-mobile .flip-button{width:100%}}
+.flip-col.s1{width:8.33333%}.flip-col.s2{width:16.66666%}.flip-col.s3{width:24.99999%}.flip-col.s4{width:33.33333%}
+.flip-col.s5{width:41.66666%}.flip-col.s6{width:49.99999%}.flip-col.s7{width:58.33333%}.flip-col.s8{width:66.66666%}
+.flip-col.s9{width:74.99999%}.flip-col.s10{width:83.33333%}.flip-col.s11{width:91.66666%}.flip-col.s12{width:99.99999%}
+.flip-col.space-s-1 {margin-left: 8.33333% !important;}.flip-col.space-s-2 {margin-left: 16.66666% !important;}  .flip-col.space-s-2-and-half {margin-left: 20.833325% !important;}  .flip-col.space-s-3, .flip-quarter-space {margin-left: 24.99999% !important;}  .flip-col.space-s-3-and-half {margin-left: 29.166665% !important;}
+.flip-col.space-s-4, .flip-third-space {margin-left: 33.33333% !important;}  .flip-col.space-s-5 {margin-left: 41.66666% !important;} .flip-col.space-s-5-half {margin-left: 45.83332% !important;}  .flip-col.space-s-6, .flip-half-space {margin-left: 49.99999% !important;}  .flip-col.space-s-7 {margin-left: 58.33333% !important;} .flip-quarter {margin-left: 25% !important;}
+.flip-col.space-s-8, .flip-two-third-space {margin-left: 66.66666% !important;}  .flip-col.space-s-9, .flip-three-qtr-space {margin-left: 74.99999% !important;}  .flip-col.space-s-10 {margin-left: 83.33333% !important;}  .flip-col.space-s-11 {margin-left: 91.66666% !important;} .flip-col.space-s-full {margin-left: 99.99999% !important}
+
 @media (max-width:768px){.flip-modal-content{width:500px}.flip-modal{padding-top:50px}}
 @media (min-width:993px){.flip-modal-content{width:900px}.flip-hide-large{display:none!important}.flip-sidebar.flip-collapse{display:block!important}}
 @media (max-width:992px) and (min-width:601px){.flip-hide-medium{display:none!important}}
