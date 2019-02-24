@@ -12,7 +12,6 @@ include "../model/DataBaseConnection.php";
 include "../model/CreateUniqueId.php";
 include "../model/User.php";
 
-
 define("NO_MATCH_FOUND", "No match found");
 define("USER_NAME_TAKEN", DUPLICATE_KEY_ENTRY);
 define("NO_TEAM_ID", "");
