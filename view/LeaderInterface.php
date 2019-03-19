@@ -13,37 +13,55 @@
     session_start();
 
     $pageTitle = "Home";
-    include "../utilities/Header.php";
-    include "../utilities/Navigation.php";
-    include "../model/Leader.php";
+    include "Header.php";
+    include "Navigation.php";
+    include "../controller/UserController.php";
 
-    $leaderObj = new Leader();
+    // Display Leader's team if Leader has a team
     if (isset($_SESSION['leader_has_Team'])){
         $leader_has_team = true;
         $leaderTeamId = empty($_SESSION['leader_has_Team']);
     } else {
         $leader_has_team = false;
+
+        echo"<br><br><br><br>test1";
+        $ctrl = new UserController();
+        $username = $_SESSION['username'];
+
+        echo $_SESSION['username'];
+
+        $teamId = "Tst_$username";
+
+        if ($ctrl->updateLeaderTeamId($username, $teamId))
+            echo "<br><br><br><br>It was updated";
+        else
+            echo "<br><br><br><br>not updated";
     }
+
 ?>
 
 <!-- Header -->
 <header class="flip-container flip-bg-gradient-red flip-center" style="padding:128px 16px; height: 700px">
 
+    <!-- Display Leader profile-->
     <div id="Profile" class="tabcontent">
         <h1>Profile</h1>
         <p>Leader information will go here with update option.</p>
     </div>
 
+    <!-- Display Schedule -->
     <div id="Schedule" class="tabcontent">
         <h1>Schedule</h1>
         <p>Schedule table will go here.</p>
     </div>
 
+    <!-- Display Games -->
     <div id="Events" class="tabcontent">
-        <h1>Events</h1>
-        <p>Events table will go here.</p>
+        <h1>Games</h1>
+        <p>Games table will go here.</p>
     </div>
 
+    <!-- Display Team information -->
     <div id="Team" class="tabcontent">
         <h1>Team</h1>
         <?php

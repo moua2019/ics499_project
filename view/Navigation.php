@@ -14,10 +14,11 @@
  * If Admin or Team Leader is logged in navigation will display Log Out option,
  * otherwise it will display Sign Up.
  */
-if (isset($_SESSION['user'])){
-    $user = $_SESSION['user'];
+if (isset($_SESSION['username'])){
+    $user = $_SESSION['username'];
+    $fname = $_SESSION['first_name'];
     $user_type = $_SESSION['user_type'];
-    $SignUp_LogOut = "Log Out";
+    $SignUp_LogOut = "[$fname] Log Out";
     $SignUp_LogOut_URL = "Logout.php";
 
     // Admin Navigation
@@ -48,7 +49,7 @@ if (isset($_SESSION['user'])){
                     <a class=\" flip-button flip-hide-medium flip-hide-large flip-right flip-padding-large flip-hover-white flip-large flip-red\" href=\"javascript:void(0);\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>
                     <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" id=\"defaultOpen\" onclick=\"openDescription('Profile', this, 'white')\"><i class=\"fa fa-user \" ></i></button>
                     <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Schedule', this, 'white')\">Schedule</button>
-                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Events', this, 'white')\">Events</button>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Events', this, 'white')\">Games</button>
                     <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Team', this, 'white')\">$leader_team</button>
                     <a href=\"$SignUp_LogOut_URL\" class=\"flip-bar-item flip-button flip-hide-small flip-padding-arge flip-hover-white flip-medium flip-right\">$SignUp_LogOut</a>
                 </div>

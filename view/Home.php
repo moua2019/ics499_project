@@ -11,11 +11,11 @@
     session_start();
 
     $pageTitle = "Home";
-    include "../utilities/Header.php";
-    include "../utilities/Navigation.php";
+    include "Header.php";
+    include "Navigation.php";
     include "../model/Leader.php";
 
-    $leaderObj = new Leader();
+//    $leaderObj = new Leader();
 ?>
 
 <!-- Header -->
@@ -33,7 +33,11 @@
         </div>
         <!-- ---------------------- End of icon link portion ------------------------ -->
 
-
+        <?php
+//            include_once "../controller/UserController.php";
+//            $controllerObj = new UserController();
+//            echo empty($controllerObj->leaderUsernameExists('leader3name') ) ? "user doesn't exists!" : $controllerObj->leaderUsernameExists('leader5name');
+        ?>
 
     </div>
     <!-- End of Icon Links -->

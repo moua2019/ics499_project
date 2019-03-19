@@ -2,7 +2,7 @@
 /**
  * Project: ics499_project
  *
- * User.php: Interface provides the main characteristics of system users.
+ * UserInterfaceInterface.php: Interface provides the main characteristics of system users.
  *
  * Initial version by: Franklin Ortega.
  * Initial version on: 2019-02-22 10:18
@@ -11,7 +11,7 @@
  * Last update on:
  */
 
-interface User
+interface UserInterface
 {
     public function setId($userId);
 
@@ -19,4 +19,4 @@ interface User
 
     public function setPassword($pass);
 
-} // End of User interface.
+} // End of UserInterface interface.

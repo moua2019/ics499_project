@@ -4,6 +4,7 @@
       <w>dbname</w>
       <w>fname</w>
       <w>lname</w>
+      <w>signup</w>
     </words>
   </dictionary>
 </component>

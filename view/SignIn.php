@@ -11,8 +11,9 @@ session_start();
  */
 
 $pageTitle = "SignIn";
-include "../utilities/Header.php";
-include '../utilities/Logo.php';
+include "Header.php";
+include 'Logo.php';
+
 
 $loginErrorMesg = "";
 $loginMessageColor = "flip-text-red";
@@ -53,20 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If no empty user name or password
         if ($user_name and $pass) {
-            // Instantiate class leader
-            include_once "../model/Leader.php";
-            $leaderObj = new Leader();
+            // Instantiate class LeaderController
+            include_once "../controller/UserController.php";
+            $controllerObj = new UserController();
 
-            // If leader username exists
-            if ($leaderObj->getLeaderUserNameIfExists($user_name) != NO_MATCH_FOUND) {
+            // If Leader username exists, verify user's password input
+            if (!empty($controllerObj->leaderUsernameExists($user_name))) {
                 // Verify password
-                if ($leaderObj->verifyLeader($user_name, $pass)) {
+                $leader = $controllerObj->getLeader($user_name);
+
+                // Check if password user's input is correct, if so, sign in and create session variables.
+                if ($controllerObj->verifyLeaderPass($user_name, $pass)) {
                     // Set session variables
-                    $_SESSION['user'] = $leaderObj->getLeaderUserNameIfExists($user_name);
-                    $lead_team_id = $leaderObj->getLeaderTeamId($user_name);
+                    $lead_team_id = $leader->getLeadTeamId();
                     if (!empty($lead_team_id)) {
                         $_SESSION['leader_has_Team'] = $lead_team_id;
                     }
+                    $_SESSION['username'] = $leader->getLeadUsername();
+                    $_SESSION['first_name'] = $leader->getLeadFirstName();
                     $_SESSION['user_type'] = "leader";
 
                     // Redirect the user
@@ -98,7 +103,7 @@ if (!isset($_SESSION['leaderUsername']) or !isset($_SESSION['adminUsername'])) {
             <h2 class='flip-center'>Sign In</h2>
             <div class=\"$loginMessageColor flip-small flip-center\">$loginErrorMesg</div>
             <form action=\"SignIn.php\" method=\"POST\">
-                  <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"User Name\" value='$temp_user' required name=\"userName\"></p>
+                  <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Username\" value='$temp_user' required name=\"userName\"></p>
                   <p><input class=\"flip-input flip-padding-small flip-border\" type=\"password\" placeholder=\"Password\" required name=\"pwd\"></p>
                   <p><input class=\"flip-black flip-hover-green flip-padding-large\" style='text-align: center; width: 50%!important; margin-left: 25%' 
                                 type=\"submit\" name=\"submit\" value='Sign In'></p>

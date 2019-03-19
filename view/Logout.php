@@ -17,7 +17,7 @@ $page_title = 'Logout';
 $home_page = "Home.php";
 
 // If user is logged in
-if (isset($_SESSION ['user'])){
+if (isset($_SESSION ['username'])){
     $_SESSION = array(); // Destroy the variables.
     session_destroy(); // Destroy session itself.
     setcookie(session_name(), '', time()-3600); // Destroy the cookie.
