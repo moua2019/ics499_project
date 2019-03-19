@@ -15,6 +15,7 @@ include "Header.php";
 include 'Logo.php';
 
 echo "
+    <!-- To display on median and large screens -->
     <div class=\"flip-content  flip-col l4 space-l-4 m6 space-m-3 flip-hide-small flip-card-4 flip-margin-top\" >
         <div class=\"flip-container flip-col l12 flip-bg-gradient-light-green\">
             <h2 class='flip-center flip-bold'>Signup Confirmation</h2>
@@ -26,6 +27,7 @@ echo "
             </div>
         </div>
     </div>
+    <!-- To display on small screens only -->
     <div class=\"flip-content  flip-col s10 space-s-1 flip-hide-large flip-hide-medium flip-card-4 flip-margin-top\" >
         <div class=\"flip-container flip-col l12 flip-bg-gradient-light-green\">
             <h2 class='flip-center'>Signup Confirmation</h2>
