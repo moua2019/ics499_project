@@ -23,19 +23,6 @@
         $leaderTeamId = empty($_SESSION['leader_has_Team']);
     } else {
         $leader_has_team = false;
-
-        echo"<br><br><br><br>test1";
-        $ctrl = new UserController();
-        $username = $_SESSION['username'];
-
-        echo $_SESSION['username'];
-
-        $teamId = "Tst_$username";
-
-        if ($ctrl->updateLeaderTeamId($username, $teamId))
-            echo "<br><br><br><br>It was updated";
-        else
-            echo "<br><br><br><br>not updated";
     }
 
 ?>
