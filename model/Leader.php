@@ -181,4 +181,13 @@ class Leader implements UserInterface
         $this->uniqueIdObject = new CreateUniqueId();
         return $this->uniqueIdObject->getUniqueId($firstName, $lastName);
     }
+
+
+    /**
+     * @return array Leader: First Name, Last Name, Username, Email, Phone, TeamId.
+     */
+    public function _toString(){
+        return array($this->getLeadFirstName(),$this->getLeadLastName(),$this->getLeadUsername(),$this->getLeadEmail(),
+                    $this->getLeadPhone(),$this->getLeadTeamId());
+    }
 } // End of Leader class.

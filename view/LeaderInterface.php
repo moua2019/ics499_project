@@ -12,30 +12,92 @@
  */
     session_start();
 
-    $pageTitle = "Home";
+    $pageTitle = "Leader";
     include "Header.php";
     include "Navigation.php";
+    include_once "../utilities/FormatPhone.php";
     include "../controller/UserController.php";
+
+    // Instantiate respective classes
+    $controllerObj = new UserController();
+    $phoneFormatObj = new FormatPhone();
 
     // Display Leader's team if Leader has a team
     if (isset($_SESSION['leader_has_Team'])){
         $leader_has_team = true;
-        $leaderTeamId = empty($_SESSION['leader_has_Team']);
+        ; // Passing Leader teamID
     } else {
         $leader_has_team = false;
     }
 
+    $leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
+
+    // Leader array is composed by First Name, Last Name, Username, Email, Phone, TeamId.
+    $fName = $leaderInfoArray[0];
+    $lName = $leaderInfoArray[1];
+    $username = $leaderInfoArray[2];
+    $email = $leaderInfoArray[3];
+    $tempPhone = $leaderInfoArray[4];
+    $teamId = $leaderInfoArray[5];
+
+    // Get Team Name using teamId
+    $leaderTeam = !empty($teamId) ? $controllerObj->getTeam($teamId) : "No Team";
+
+    // Format phone number if not empty
+    if (empty($tempPhone)) {
+        $phone = "N/A";
+    } else {
+        $phoneFormatObj->setFormattedNumber($tempPhone);
+        $phone = $phoneFormatObj->getFormattedNumber();
+    }
 ?>
 
 <!-- Header -->
-<header class="flip-container flip-bg-gradient-red flip-center" style="padding:128px 16px; height: 700px">
-
+<header class="flip-container flip-bg-gradient-red flip-center" style="padding:70px 16px; height: 700px">
+<?php echo "
     <!-- Display Leader profile-->
-    <div id="Profile" class="tabcontent">
-        <h1>Profile</h1>
-        <p>Leader information will go here with update option.</p>
+    <div id=\"Profile\" class=\"tabcontent\">
+        <h1 class='flip-bolder'>Profile</h1>
+
+        <div class=\"flip-col l6 space-l-3 m6 space-m-3 s10 space-s-1\">
+            <table class=\"flip-table flip-striped flip-white\">
+                <tr>
+                    <td><i class=\"fa fa-user flip-text-blue-499 flip-large\"></i></td>
+                    <td>Name:</td>
+                    <td>$fName &nbsp  $lName</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><i class=\"fa fa-id-card flip-text-deep-blue-499 flip-large\"></i></td>
+                    <td>Username:</td>
+                    <td><i>$username</i></td>
+                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                </tr>
+                <tr>
+                    <td><i class=\"fa fa-envelope flip-text-deep-blue-499  flip-large\"></i></td>
+                    <td>Email:</td>
+                    <td>$email</td>
+                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                </tr>
+                <tr>
+                    <td><i class=\"fa fa-mobile flip-text-deep-blue-499  flip-xlarge\"></i></td>
+                    <td>Phone:</td>
+                    <td><i>$phone</i></td>
+                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                </tr>
+                <tr>
+                    <td><i class=\"fa fa-trophy flip-text-deep-blue-499  flip-large\"></i></td>
+                    <td>Team:</td>
+                    <td><i>$leaderTeam</i></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        
     </div>
 
+    ";
+    ?>
     <!-- Display Schedule -->
     <div id="Schedule" class="tabcontent">
         <h1>Schedule</h1>

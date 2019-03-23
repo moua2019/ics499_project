@@ -68,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Set session variables
                     $lead_team_id = $leader->getLeadTeamId();
                     if (!empty($lead_team_id)) {
-                        $_SESSION['leader_has_Team'] = $lead_team_id;
+                        $_SESSION['leader_has_Team'] = true;
+                        $_SESSION['leader_team_id'] = $leader->getLeadTeamId();
                     }
                     $_SESSION['username'] = $leader->getLeadUsername();
                     $_SESSION['first_name'] = $leader->getLeadFirstName();

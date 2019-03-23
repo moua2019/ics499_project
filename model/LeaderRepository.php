@@ -85,7 +85,7 @@ class LeaderRepository extends DataBaseConnection implements RepositoryInterface
         // Return user if exists
         if ($stmt->rowCount()) {
             while ($row = $stmt->fetch()) {
-                $leaderArray [] = new Leader($row['leader_id'],$row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone']);
+                $leaderArray [] = new Leader($row['leader_id'],$row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone'], $row['leader_team_id']);
             }
 
         }

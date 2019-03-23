@@ -60,6 +60,19 @@ class UserController
     }
 
     /**
+     * @param $username String user input
+     * @return array with Leader information
+     */
+    public function getLeaderInfo($username){
+
+        $repository = new LeaderRepository();
+
+        $leader = $repository->getUserByUsername($username);
+
+        return $leader->_toString();
+    }
+
+    /**
      * @return mixed an array of Leader type objects
      */
     public function getAllLeaders()
@@ -91,6 +104,15 @@ class UserController
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param $teamId Leader teamID, used to retrieved Leader's Team Name
+     * @return string Name of the Team
+     */
+    public function getTeam($teamId){
+        //TODO: get data from team table. For now return Team in Process
+        return "--Getting Team Name in Process--";
     }
 
 } // End of UserController class.
