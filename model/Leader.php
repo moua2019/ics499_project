@@ -6,8 +6,8 @@
  * Initial version by: Franklin Ortega.
  * Initial version on: 2019-02-22 15:54
  *
- * Last update by:
- * Last update on:
+ * Last update by: Franklin Ortega
+ * Last update on: 2019-03-23 13:04
  */
 
 include_once "UserInterface.php";
@@ -52,23 +52,6 @@ class Leader implements UserInterface
     }
 
 
-
-    public function setId($userName)
-    {
-        $this->id = $this->createUniqueId($this->getLeadFirstName(), $this->getLeadLastName());
-    }
-
-    public function setUsername($userName)
-    {
-        $this->leadUsername = $userName;
-    }
-
-    public function setPassword($pass)
-    {
-        $this->password = password_hash($pass, PASSWORD_DEFAULT);
-    }
-
-
     /**
      * @return mixed
      */
@@ -76,6 +59,12 @@ class Leader implements UserInterface
     {
         return $this->id;
     }
+
+    public function setId($userName)
+    {
+        $this->id = $this->createUniqueId($this->getLeadFirstName(), $this->getLeadLastName());
+    }
+
 
     /**
      * @return mixed
@@ -85,44 +74,25 @@ class Leader implements UserInterface
         return $this->leadUsername;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLeadEmail()
+    public function setUsername($userName)
     {
-        return $this->leadEmail;
+        $this->leadUsername = $userName;
     }
 
     /**
      * @return mixed
      */
-    public function getLeadPhone()
+    public function getLeadFirstName()
     {
-        return $this->leadPhone;
+        return $this->leadFirstName;
     }
 
     /**
-     * @return mixed
+     * @param mixed $leadFirstName
      */
-    public function getPassword()
+    public function setLeadFirstName($leadFirstName)
     {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $leadEmail
-     */
-    public function setLeadEmail($leadEmail)
-    {
-        $this->leadEmail = $leadEmail;
-    }
-
-    /**
-     * @param mixed $leadPhone
-     */
-    public function setLeadPhone($leadPhone)
-    {
-        $this->leadPhone = $leadPhone;
+        $this->leadFirstName = $leadFirstName;
     }
 
     /**
@@ -144,17 +114,46 @@ class Leader implements UserInterface
     /**
      * @return mixed
      */
-    public function getLeadFirstName()
+    public function getLeadEmail()
     {
-        return $this->leadFirstName;
+        return $this->leadEmail;
     }
 
     /**
-     * @param mixed $leadFirstName
+     * @param mixed $leadEmail
      */
-    public function setLeadFirstName($leadFirstName)
+    public function setLeadEmail($leadEmail)
     {
-        $this->leadFirstName = $leadFirstName;
+        $this->leadEmail = $leadEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLeadPhone()
+    {
+        return $this->leadPhone;
+    }
+
+    /**
+     * @param mixed $leadPhone
+     */
+    public function setLeadPhone($leadPhone)
+    {
+        $this->leadPhone = $leadPhone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($pass)
+    {
+        $this->password = password_hash($pass, PASSWORD_DEFAULT);
     }
 
     /**
@@ -174,7 +173,14 @@ class Leader implements UserInterface
     }
 
 
-
+    /*
+     * createUniqueId() calls CreateUniqueId class to generate a unique id passing
+     * Leader's first name and last name
+     *
+     * @param $firstName
+     * @param $lastName
+     * @return String unique created id
+     */
     private function createUniqueId($firstName, $lastName)
     {
         include_once "../model/CreateUniqueId.php";
