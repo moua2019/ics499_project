@@ -65,19 +65,19 @@ if (empty($tempPhone)) {
                     <td><i class=\"fa fa-id-card flip-text-deep-blue-499 flip-large\"></i></td>
                     <td>Username:</td>
                     <td><i>$username</i></td>
-                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                    <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
                 </tr>
                 <tr>
                     <td><i class=\"fa fa-envelope flip-text-deep-blue-499  flip-large\"></i></td>
                     <td>Email:</td>
                     <td>$email</td>
-                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                    <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
                 </tr>
                 <tr>
                     <td><i class=\"fa fa-mobile flip-text-deep-blue-499  flip-xlarge\"></i></td>
                     <td>Phone:</td>
                     <td><i>$phone</i></td>
-                    <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
+                    <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
                 </tr>
             </table>
         </div>
@@ -93,9 +93,22 @@ if (empty($tempPhone)) {
     </div>
 
     <!-- Display Games -->
-    <div id="Events" class="tabcontent">
+    <div id="Games" class="tabcontent">
         <h1>Games</h1>
         <p>Games table will go here.</p>
+    </div>
+
+    <!-- Display Roster -->
+    <div id="Roster" class="tabcontent">
+        <h1>Roster</h1>
+        <p>Roster table will go here.</p>
+    </div>
+
+
+    <!-- Display Leader-->
+    <div id="Leader" class="tabcontent">
+        <h1>Leader</h1>
+        <p>Leader table will go here.</p>
     </div>
 
 </header>
@@ -179,7 +192,7 @@ if (empty($tempPhone)) {
         }
     }
 
-    function openDescription(cityName,elmnt,color) {
+    function openDescription(adminGrid,elmnt,color) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -191,7 +204,7 @@ if (empty($tempPhone)) {
             tablinks[i].style.backgroundColor = "#1C4791";
             tablinks[i].style.color = "";
         }
-        document.getElementById(cityName).style.display = "block";
+        document.getElementById(adminGrid).style.display = "block";
         elmnt.style.backgroundColor = color;
         elmnt.style.color = 'black';
 
