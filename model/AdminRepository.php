@@ -5,18 +5,21 @@
  * Date: 3/24/2019
  * Time: 9:52 AM
  */
+include_once "DataBaseConnection.php";
+include_once "RepositoryInterface.php";
 
 class AdminRepository extends DataBaseConnection implements RepositoryInterface
 {
 //    private $admin;
-    public function _construct(){
+    public function _construct()
+    {
     }
 
     /**
-     * @param UserInterface $leader Add user to db
+     *
      * @return bool True if user is added to data base, false otherwise.
      */
-    /*public function addUser(UserInterface $leader)
+    public function addUser(UserInterface $leader)
     {
         $stmt = $this->getDbc()->prepare("INSERT INTO Leader (leader_id, leader_username, leader_firstName, leader_lastName, leader_email, leader_phone, leader_pass)
                                               VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -26,7 +29,7 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
             $leader->getLeadFirstName(), $leader->getLeadLastName(),
             $leader->getLeadEmail(), $leader->getLeadPhone(),
             $leader->getPassword()])) ? false : true;
-    }*/
+    }
 
 
     /**
@@ -46,7 +49,7 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
             // Return user if exists
             if ($stmt->rowCount()) {
                 while ($row = $stmt->fetch()) {
-                    $admin = new Admin($row['admin_username'],$row['admin_firstName'],$row['admin_lastName'],$row['admin_email'],$row['admin_phone'], $row['admin_pass']);
+                    $admin = new Admin($row['admin_username'], $row['admin_firstName'], $row['admin_lastName'], $row['admin_email'], $row['admin_phone'], $row['admin_pass']);
 
                     return $admin;
                 }
@@ -78,7 +81,7 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
         // Return user if exists
         if ($stmt->rowCount()) {
             while ($row = $stmt->fetch()) {
-                $adminArray [] = new Admin($row['admin_id'],$row['admin_username'],$row['admin_firstName'],$row['admin_lastName'],$row['admin_email'],$row['admin_phone']);
+                $adminArray [] = new Admin($row['admin_id'], $row['admin_username'], $row['admin_firstName'], $row['admin_lastName'], $row['admin_email'], $row['admin_phone']);
             }
 
         }
@@ -92,7 +95,8 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
      * @param String $pwd user's password input
      * @return bool True if user's password match password_in_file, false otherwise
      */
-    public function verifyAdmin($username, $pwd) {
+    public function verifyAdmin($username, $pwd)
+    {
         // If username and pwd are not empty
         if (!empty($username) and !empty($pwd)) {
             // Prepare statement
@@ -127,17 +131,14 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
      * @param String $teamId Team Id to insert into db
      * @return bool True if update is successful, false otherwise.
      */
-   /* public function updateLeaderTeamId ($username, $teamId) {
-        if (!is_null($teamId)){
-            // Prepare statement
-            $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_team_id = ? WHERE leader_username = ?");
+    /* public function updateLeaderTeamId ($username, $teamId) {
+         if (!is_null($teamId)){
+             // Prepare statement
+             $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_team_id = ? WHERE leader_username = ?");
 
-            // Execute statement / add teamId to Leader table
-            return !($stmt->execute([$teamId, $username])) ? false : true;
+             // Execute statement / add teamId to Leader table
+             return !($stmt->execute([$teamId, $username])) ? false : true;
 
-        }*/
-    }
-
+         }*/
 
 } // End of Repository class.
-}
