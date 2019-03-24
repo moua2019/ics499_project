@@ -70,7 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['username'] = $admin->getAdminUsername();
 
                     $_SESSION['first_name'] = $admin->getAdminFirstName();
-                    $_SESSION['user_type'] = "admin";
+
+                    // Variable session used to display admin navigation on Navigation.php
+                    $_SESSION['user_navigation'] = "admin";
 
                     echo "Session username:" . $_SESSION['username'];
 
