@@ -22,7 +22,7 @@ if (isset($_SESSION['username'])){
     $SignUp_LogOut_URL = "Logout.php";
 
     // Admin Navigation
-    if ($user_type == "admin"){
+    if ($user_navigation == "admin"){
         echo "
             <!-- Navbar -->
             <div class=\"flip-top\">
@@ -43,7 +43,7 @@ if (isset($_SESSION['username'])){
                 </div>
             </div>
         ";
-    } else if ($user_type == "leader") {
+    } else if ($user_navigation == "leader") { // Leader Navigation
         $leader_team = isset($_SESSION['leader_has_Team']) ? "Team" : "Team SignUp";
 
         echo "
