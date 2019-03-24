@@ -18,7 +18,7 @@ include 'Logo.php';
 $loginErrorMesg = "";
 $loginMessageColor = "flip-text-red";
 $alignment = "";
-$sign_up_str = "<a class=\"flip-small flip-bar-item flip-hover-text-green flip-animate-left $\"  style=\"text-decoration: none !important\" href='LeaderSignUp.php'> Sign Up</a>";
+//$sign_up_str = "<a class=\"flip-small flip-bar-item flip-hover-text-green flip-animate-left $\"  style=\"text-decoration: none !important\" href='LeaderSignUp.php'> Sign Up</a>";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -54,17 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If no empty user name or password
         if ($user_name and $pass) {
-            // Instantiate class LeaderController
-            include_once "../controller/UserController.php";
+            // Instantiate class AdminController
+            include_once "../controller/AdminController.php";
             $controllerObj = new UserController();
 
             // If Leader username exists, verify user's password input
-            if (!empty($controllerObj->leaderUsernameExists($user_name))) {
+            if (!empty($controllerObj->adminUsernameExists($user_name))) {
                 // Verify password
-                $leader = $controllerObj->getLeader($user_name);
+                $admin = $controllerObj->getAdmin($user_name);
 
                 // Check if password user's input is correct, if so, sign in and create session variables.
-                if ($controllerObj->verifyLeaderPass($user_name, $pass)) {
+                if ($controllerObj->verifyAdminPass($user_name, $pass)) {
                     // Set session variables
 
                    /* $_SESSION['username'] = $leader->getLeadUsername();
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
             } else {
-                $loginErrorMesg = $user_name . " is not registered,<br>Please $sign_up_str";
+                $loginErrorMesg = $user_name . " is not registered.";
             }
         } // End of if no empty user input
 
@@ -107,7 +107,6 @@ if (!isset($_SESSION['adminUsername']) ) {
             </form>
             <div class=\"flip-padding-small flip-margin-bottom flip-center\">
                 <a class='flip-small flip-bar-item flip-hover-text-green flip-left flip-animate-right' href='Home.php' style='text-decoration: none !important'> Return to home page</a>
-                <a class='flip-small flip-bar-item flip-hover-text-green flip-right flip-animate-left'  style='text-decoration: none !important'href='LeaderSignUp.php'> Sign Up</a>
             </div>
         </div>
       </div>
