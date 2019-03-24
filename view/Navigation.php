@@ -17,7 +17,7 @@
 if (isset($_SESSION['username'])){
     $user = $_SESSION['username'];
     $fname = $_SESSION['first_name'];
-    $user_type = $_SESSION['user_type'];
+    $user_navigation = $_SESSION['user_navigation'];
     $SignUp_LogOut = "[$fname] Log Out";
     $SignUp_LogOut_URL = "Logout.php";
 
