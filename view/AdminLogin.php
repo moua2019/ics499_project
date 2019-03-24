@@ -54,17 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If no empty user name or password
         if ($user_name and $pass) {
-            // Instantiate class LeaderController
-            include_once "../controller/UserController.php";
+            // Instantiate class AdminController
+            include_once "../controller/AdminController.php";
             $controllerObj = new UserController();
 
             // If Leader username exists, verify user's password input
-            if (!empty($controllerObj->leaderUsernameExists($user_name))) {
+            if (!empty($controllerObj->adminUsernameExists($user_name))) {
                 // Verify password
-                $leader = $controllerObj->getLeader($user_name);
+                $admin = $controllerObj->getAdmin($user_name);
 
                 // Check if password user's input is correct, if so, sign in and create session variables.
-                if ($controllerObj->verifyLeaderPass($user_name, $pass)) {
+                if ($controllerObj->verifyAdminPass($user_name, $pass)) {
                     // Set session variables
 
                    /* $_SESSION['username'] = $leader->getLeadUsername();
