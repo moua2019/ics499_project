@@ -73,7 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $_SESSION['username'] = $leader->getLeadUsername();
                     $_SESSION['first_name'] = $leader->getLeadFirstName();
-                    $_SESSION['user_type'] = "leader";
+
+
+                    // Variable session used to display Leader navigation on Navigation.php
+                    $_SESSION['user_navigation'] = "leader";
 
                     // Redirect the user
                     header("Location: LeaderInterface.php");
