@@ -18,7 +18,7 @@ include 'Logo.php';
 $loginErrorMesg = "";
 $loginMessageColor = "flip-text-red";
 $alignment = "";
-$sign_up_str = "<a class=\"flip-small flip-bar-item flip-hover-text-green flip-animate-left $\"  style=\"text-decoration: none !important\" href='LeaderSignUp.php'> Sign Up</a>";
+//$sign_up_str = "<a class=\"flip-small flip-bar-item flip-hover-text-green flip-animate-left $\"  style=\"text-decoration: none !important\" href='LeaderSignUp.php'> Sign Up</a>";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
             } else {
-                $loginErrorMesg = $user_name . " is not registered,<br>Please $sign_up_str";
+                $loginErrorMesg = $user_name . " is not registered.";
             }
         } // End of if no empty user input
 
@@ -107,7 +107,6 @@ if (!isset($_SESSION['adminUsername']) ) {
             </form>
             <div class=\"flip-padding-small flip-margin-bottom flip-center\">
                 <a class='flip-small flip-bar-item flip-hover-text-green flip-left flip-animate-right' href='Home.php' style='text-decoration: none !important'> Return to home page</a>
-                <a class='flip-small flip-bar-item flip-hover-text-green flip-right flip-animate-left'  style='text-decoration: none !important'href='LeaderSignUp.php'> Sign Up</a>
             </div>
         </div>
       </div>
