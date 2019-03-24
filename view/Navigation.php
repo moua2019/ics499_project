@@ -28,7 +28,11 @@ if (isset($_SESSION['username'])){
             <div class=\"flip-top\">
                 <div class=\"flip-bar flip-blue-499 flip-card flip-left-align flip-large\">
                     <a class=\" flip-button flip-hide-medium flip-hide-large flip-right flip-padding-large flip-hover-white flip-large flip-red\" href=\"javascript:void(0);\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>
-                    <a href=\"#\" class=\"flip-bar-item flip-button flip-white\"><i class=\"fa fa-home\" style=\"font-size: 26px; padding: 5px 24px\" ></i></a>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" id=\"defaultOpen\" onclick=\"openDescription('Profile', this, 'white')\"><i class=\"fa fa-user \" ></i></button>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Schedule', this, 'white')\">Schedule</button>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Games', this, 'white')\">Games</button>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Roster', this, 'white')\">Roster</button>
+                    <button class=\"tablink flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white\" onclick=\"openDescription('Leader', this, 'white')\">Leader</button>
                     <a href=\"$SignUp_LogOut_URL\" class=\"flip-bar-item flip-button flip-hide-small flip-padding-large flip-hover-white flip-medium flip-right\">$SignUp_LogOut</a>
                 </div>
     
