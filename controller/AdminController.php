@@ -18,10 +18,9 @@
  */
 
 include_once "../model/Admin.php";
-include_once "../model/AdminrRepository.php";
+include_once "../model/AdminRepository.php";
 
-class AdminController
-{
+class AdminController {
     private $adminRepository;
 
     /**
@@ -32,14 +31,14 @@ class AdminController
         $this->adminRepository = new adminRepository();
     }
 
-/*
-    public function registerLeader($first, $last, $username, $email, $phone, $password, $teamId)
-    {
-        $repository = new LeaderRepository();
-        $user = new Leader($username, $first, $last, $email, $phone, $password, $teamId);
 
-        return !($repository->addUser($user)) ? '../view/LeaderSignUp.php' : '../view/SignupConfirmation.php';
-    }*/
+//    public function registerLeader($first, $last, $username, $email, $phone, $password, $teamId)
+//    {
+//        $repository = new LeaderRepository();
+//        $user = new Leader($username, $first, $last, $email, $phone, $password, $teamId);
+//
+//        return !($repository->addUser($user)) ? '../view/LeaderSignUp.php' : '../view/SignupConfirmation.php';
+//    }
 
     /**
      * @param $username String is used to verify if user exist
@@ -70,7 +69,7 @@ class AdminController
      * @return array with Leader information
      */
     public function getAdminInfo($username){
-
+        echo "username:" . $username;
         $repository = new AdminRepository();
 
         $admin = $repository->getUserByUsername($username);
@@ -95,33 +94,30 @@ class AdminController
      */
     public function verifyAdminPass($username, $pwd) {
         $repository = new AdminRepository();
-        return $repository->verifyLeader($username, $pwd);
+        return $repository->verifyAdmin($username, $pwd);
     }
 
-    /**
-     * @param String $username Leader username
-     * @param String $teamId used to update Leader team id
-     * @return bool True if leader team id is updated, false otherwise
-     */
-    /*public function updateLeaderTeamId ($username, $teamId) {
-        if (!(empty($username) and empty($teamId))) {
-            $repository = new adminRepository();
-            return $repository->updateLeaderTeamId($username, $teamId);
-        } else {
-            return false;
-        }
-    }*/
+//    /**
+//     * @param String $username Leader username
+//     * @param String $teamId used to update Leader team id
+//     * @return bool True if leader team id is updated, false otherwise
+//     */
+//    public function updateLeaderTeamId ($username, $teamId) {
+//        if (!(empty($username) and empty($teamId))) {
+//            $repository = new adminRepository();
+//            return $repository->updateLeaderTeamId($username, $teamId);
+//        } else {
+//            return false;
+//        }
+//    }
 
-    /**
-     * @param $teamId Leader teamID, used to retrieved Leader's Team Name
-     * @return string Name of the Team
-     */
-    /*public function getTeam($teamId){
-        return "--Getting Team Name in Process--";*/
-    }
+//    /**
+//     * @param $teamId Leader teamID, used to retrieved Leader's Team Name
+//     * @return string Name of the Team
+//     */
+//    public function getTeam($teamId){
+//        return "--Getting Team Name in Process--";
+//    }
 
-}
+} // End of AdminController class.
 
-// End of AdminController class.
-
-}

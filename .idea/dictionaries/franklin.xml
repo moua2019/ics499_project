@@ -4,6 +4,9 @@
       <w>dbname</w>
       <w>fname</w>
       <w>lname</w>
+      <w>mesg</w>
+      <w>nengchu</w>
+      <w>pajhli</w>
       <w>signup</w>
     </words>
   </dictionary>

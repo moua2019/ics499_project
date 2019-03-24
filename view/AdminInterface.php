@@ -1,9 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Pajhli Nengchu
- * Date: 3/24/2019
- * Time: 10:13 AM
+ * Project: ics499_project
+ *
+ * Initial version by: Pajhli Nengchu
+ * Initial version on: 3/24/2019 10:13 AM
+ *
+ * Last update by:
+ * Last update on:
+ *
  */
 session_start();
 
@@ -14,16 +18,9 @@ include_once "../utilities/FormatPhone.php";
 include "../controller/AdminController.php";
 
 // Instantiate respective classes
-$controllerObj = new UserController();
+$controllerObj = new AdminController();
 $phoneFormatObj = new FormatPhone();
 
-// Display Leader's team if Leader has a team
-/*if (isset($_SESSION['leader_has_Team'])){
-    $leader_has_team = true;
-    ; // Passing Leader teamID
-} else {
-    $leader_has_team = false;
-}*/
 
 $adminInfoArray = $controllerObj->getAdminInfo($_SESSION['username']);
 
@@ -45,12 +42,14 @@ if (empty($tempPhone)) {
     $phoneFormatObj->setFormattedNumber($tempPhone);
     $phone = $phoneFormatObj->getFormattedNumber();
 }
+
 ?>
 
 <!-- Header -->
 <header class="flip-container flip-bg-gradient-red flip-center" style="padding:70px 16px; height: 700px">
-    <?php echo "
-    <!-- Display Leader profile-->
+    <?php
+    echo " 
+    <!-- Display Profile -->
     <div id=\"Profile\" class=\"tabcontent\">
         <h1 class='flip-bolder'>Profile</h1>
 
@@ -80,15 +79,9 @@ if (empty($tempPhone)) {
                     <td><i>$phone</i></td>
                     <td><i class=\"flip-button flip-xtiny\">Edit</i></td>
                 </tr>
-                <tr>
-                    <td><i class=\"fa fa-trophy flip-text-deep-blue-499  flip-large\"></i></td>
-                    <td>Team:</td>
-                    <td><i>$leaderTeam</i></td>
-                    <td></td>
-                </tr>
             </table>
         </div>
-        
+
     </div>
 
     ";
@@ -113,10 +106,16 @@ if (empty($tempPhone)) {
     <div class="flip-content flip-margin-right">
         <div class="flip-twothird flip-padding">
             <h1>League Information</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.</h5>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
 
@@ -136,10 +135,16 @@ if (empty($tempPhone)) {
 
         <div class="flip-twothird">
             <h1>Volleyball</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.</h5>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
     </div>

@@ -7,6 +7,9 @@
  */
 include_once "UserInterface.php";
 
+/**
+ * @property CreateUniqueId uniqueIdObject
+ */
 class Admin implements UserInterface
 {
     private $id;
@@ -17,7 +20,7 @@ class Admin implements UserInterface
     private $adminPhone;
     private $password;
     private $uniqueIdObject;
-  //  private $leadTeamId;
+//    private $leadTeamId;
 
 
     /**
@@ -36,11 +39,11 @@ class Admin implements UserInterface
      */
     public function __construct($userName, $firstName, $lastName, $email, $phone, $pwd){
         $this->setUsername($userName);
-        $this->setLeadFirstName($firstName);
-        $this->setLeadLastName($lastName);
+        $this->setAdminFirstName($firstName);
+        $this->setAdminLastName($lastName);
         $this->setId($this->adminFirstName);
-        $this->setLeadEmail($email);
-        $this->setLeadPhone($phone);
+        $this->setAdminEmail($email);
+        $this->setAdminPhone($phone);
         $this->setPassword($pwd);
        // $this->setLeadTeamId($teamId);
     }
@@ -74,7 +77,7 @@ class Admin implements UserInterface
     /**
      * @return mixed
      */
-    public function getadminUsername()
+    public function getAdminUsername()
     {
         return $this->adminUsername;
     }
@@ -144,37 +147,37 @@ class Admin implements UserInterface
     }
 
     /**
-     * @param mixed $admindFirstName
+     * @param $adminFirstName
      */
     public function setAdminFirstName($adminFirstName)
     {
         $this->adminFirstName = $adminFirstName;
     }
 
-    /**
-     * @return mixed leader team id
-
-    public function getLeadTeamId()
-    {
-        return $this->leadTeamId;
-    }
-
-    /**
-     * @param mixed $teamId user leader team id input
-
-    public function setLeadTeamId($teamId)
-    {
-        $this->leadTeamId = $teamId;
-    }
-
-
-
+//    /**
+//     * @return mixed leader team id
+//     */
+//    public function getLeadTeamId()
+//    {
+//        return $this->leadTeamId;
+//    }
+//
+//    /**
+//     * @param mixed $teamId user leader team id input
+//    */
+//    public function setLeadTeamId($teamId)
+//    {
+//        $this->leadTeamId = $teamId;
+//    }
+//
+//
+//
     private function createUniqueId($firstName, $lastName)
     {
         include_once "../model/CreateUniqueId.php";
         $this->uniqueIdObject = new CreateUniqueId();
         return $this->uniqueIdObject->getUniqueId($firstName, $lastName);
-    }*/
+    }
 
 
     /**

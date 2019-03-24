@@ -126,19 +126,21 @@ class AdminRepository extends DataBaseConnection implements RepositoryInterface
         }
     }
 
-    /**
-     * @param String $username used to update Leader team id
-     * @param String $teamId Team Id to insert into db
-     * @return bool True if update is successful, false otherwise.
-     */
-    /* public function updateLeaderTeamId ($username, $teamId) {
-         if (!is_null($teamId)){
-             // Prepare statement
-             $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_team_id = ? WHERE leader_username = ?");
-
-             // Execute statement / add teamId to Leader table
-             return !($stmt->execute([$teamId, $username])) ? false : true;
-
-         }*/
+//    /**
+//     * @param String $username used to update Leader team id
+//     * @param String $teamId Team Id to insert into db
+//     * @return bool True if update is successful, false otherwise.
+//     */
+//    public function updateLeaderTeamId ($username, $teamId)
+//    {
+//        if (!is_null($teamId)) {
+//            // Prepare statement
+//            $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_team_id = ? WHERE leader_username = ?");
+//
+//            // Execute statement / add teamId to Leader table
+//            return !($stmt->execute([$teamId, $username])) ? false : true;
+//
+//        }
+//    }
 
 } // End of Repository class.

@@ -9,6 +9,7 @@
  * Last update on:
  */
 
+session_start();
 
 $pageTitle = "AdminLogin";
 include "Header.php";
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user_name and $pass) {
             // Instantiate class AdminController
             include_once "../controller/AdminController.php";
-            $controllerObj = new UserController();
+            $controllerObj = new AdminController();
 
             // If Leader username exists, verify user's password input
             if (!empty($controllerObj->adminUsernameExists($user_name))) {
@@ -66,14 +67,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Check if password user's input is correct, if so, sign in and create session variables.
                 if ($controllerObj->verifyAdminPass($user_name, $pass)) {
                     // Set session variables
+                    $_SESSION['username'] = $admin->getAdminUsername();
 
-                   /* $_SESSION['username'] = $leader->getLeadUsername();
-                    $_SESSION['first_name'] = $leader->getLeadFirstName();
-                    $_SESSION['user_type'] = "leader";
+                    $_SESSION['first_name'] = $admin->getAdminFirstName();
+                    $_SESSION['user_type'] = "admin";
 
-                    // Redirect the user
-                    header("Location: LeaderInterface.php");
-*/
+                    echo "Session username:" . $_SESSION['username'];
+
+                    // Redirect admin
+                    header("Location: AdminInterface.php");
+
                     // Exit page when it is done
                     exit();
                 } else {
@@ -99,14 +102,14 @@ if (!isset($_SESSION['adminUsername']) ) {
         <div class=\"flip-container flip-col l12 \">
             <h2 class='flip-center'>Sign In</h2>
             <div class=\"$loginMessageColor flip-small flip-center\">$loginErrorMesg</div>
-            <form action=\"SignIn.php\" method=\"POST\">
+            <form action=\"AdminLogin.php\" method=\"POST\">
                   <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Username\" value='$temp_user' required name=\"userName\"></p>
                   <p><input class=\"flip-input flip-padding-small flip-border\" type=\"password\" placeholder=\"Password\" required name=\"pwd\"></p>
                   <p><input class=\"flip-black flip-hover-green flip-padding-large\" style='text-align: center; width: 50%!important; margin-left: 25%' 
                                 type=\"submit\" name=\"submit\" value='Sign In'></p>
             </form>
             <div class=\"flip-padding-small flip-margin-bottom flip-center\">
-                <a class='flip-small flip-bar-item flip-hover-text-green flip-left flip-animate-right' href='Home.php' style='text-decoration: none !important'> Return to home page</a>
+                <a class='flip-small flip-bar-item flip-hover-text-green flip-center ' href='Home.php' style='text-decoration: none !important'><i class='flip-animate-left'>Return to</i> <i class='flip-animate-right'>home page</i></a>
             </div>
         </div>
       </div>
