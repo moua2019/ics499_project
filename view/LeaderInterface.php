@@ -25,7 +25,6 @@
     // Display Leader's team if Leader has a team
     if (isset($_SESSION['leader_has_Team'])){
         $leader_has_team = true;
-        ; // Passing Leader teamID
     } else {
         $leader_has_team = false;
     }

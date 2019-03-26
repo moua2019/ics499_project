@@ -66,13 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Check if password user's input is correct, if so, sign in and create session variables.
                 if ($controllerObj->verifyLeaderPass($user_name, $pass)) {
                     // Set session variables
-                    $lead_team_id = $leader->getLeadTeamId();
+                    $lead_team_id = $leader->getLeadRosterId();
                     if (!empty($lead_team_id)) {
                         $_SESSION['leader_has_Team'] = true;
-                        $_SESSION['leader_team_id'] = $leader->getLeadTeamId();
+                        $_SESSION['leader_team_id'] = $lead_team_id;
                     }
                     $_SESSION['username'] = $leader->getLeadUsername();
                     $_SESSION['first_name'] = $leader->getLeadFirstName();
+                    $_SESSION['leader_id'] = $leader->getId();
 
 
                     // Variable session used to display Leader navigation on Navigation.php

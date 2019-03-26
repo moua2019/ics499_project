@@ -15,7 +15,7 @@
  * otherwise it will display Sign Up.
  */
 if (isset($_SESSION['username'])){
-    $user = $_SESSION['username'];
+    $username = $_SESSION['username'];
     $fname = $_SESSION['first_name'];
     $user_navigation = $_SESSION['user_navigation'];
     $SignUp_LogOut = "[$fname] Log Out";

@@ -14,6 +14,7 @@ include "Header.php";
 include "Logo.php";
 include "../controller/UserController.php";
 include "../utilities/CleanData.php";
+include_once "../model/CreateUniqueId.php";
 
 // To display sign up error message to user
 $signup_error_msg = "";
@@ -84,11 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             // When registering, Leader has no team id. So it is empty
             $empty_leader_team_id = "";
 
+            // Create a unique id for leader
+            $createIdObj = new CreateUniqueId();
+            $leader_id = $createIdObj->getUniqueId($first_name, $last_name);
+
             // Verify if username is not taken.
             if (!empty($controller->leaderUsernameExists($username))) {
                 $signup_error_msg = "Username \"$username\" exists, please choose a different one.";
             } else {
-                $redirect = $controller->registerLeader($first_name, $last_name, $username, $email, $phone, $password, $empty_leader_team_id);
+                $redirect = $controller->registerLeader($leader_id, $first_name, $last_name, $username, $email, $phone, $password, $empty_leader_team_id);
                 header("location: $redirect");
             }
         } else if (!empty($signupErrorArr)) {
