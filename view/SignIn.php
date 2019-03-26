@@ -6,8 +6,8 @@ session_start();
  * Initial version by: Franklin Ortega
  * Initial version on: 2019-02-19 14:15
  *
- * Last update by:
- * Last update on:
+ * Last update by: 2019-03-26
+ * Last update on: Franklin Ortega
  */
 
 $pageTitle = "SignIn";
