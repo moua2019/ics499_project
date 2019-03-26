@@ -21,8 +21,7 @@ class Leader implements UserInterface
     private $leadEmail;
     private $leadPhone;
     private $password;
-    private $uniqueIdObject;
-    private $leadTeamId;
+    private $leadRosterId;
 
 
     /**
@@ -32,23 +31,24 @@ class Leader implements UserInterface
 
     /**
      * Leader constructor.
+     * @param $leader_id
      * @param $userName
      * @param $firstName
      * @param $lastName
      * @param $email
      * @param $phone
      * @param $pwd
-     * @param $teamId
+     * @param $rosterId
      */
-    public function __construct($userName, $firstName, $lastName, $email, $phone, $pwd, $teamId){
+    public function __construct($leader_id, $userName, $firstName, $lastName, $email, $phone, $pwd, $rosterId){
+        $this->setId($leader_id);
         $this->setUsername($userName);
         $this->setLeadFirstName($firstName);
         $this->setLeadLastName($lastName);
-        $this->setId($this->leadFirstName);
         $this->setLeadEmail($email);
         $this->setLeadPhone($phone);
         $this->setPassword($pwd);
-        $this->setLeadTeamId($teamId);
+        $this->setLeadRosterId($rosterId);
     }
 
 
@@ -60,9 +60,9 @@ class Leader implements UserInterface
         return $this->id;
     }
 
-    public function setId($userName)
+    public function setId($leader_id)
     {
-        $this->id = $this->createUniqueId($this->getLeadFirstName(), $this->getLeadLastName());
+        $this->id = $leader_id;
     }
 
 
@@ -157,43 +157,27 @@ class Leader implements UserInterface
     }
 
     /**
-     * @return mixed leader team id
+     * @return mixed leader roster id
      */
-    public function getLeadTeamId()
+    public function getLeadRosterId()
     {
-        return $this->leadTeamId;
+        return $this->leadRosterId;
     }
 
     /**
-     * @param mixed $teamId user leader team id input
+     * @param mixed $rosterId user leader roster id input
      */
-    public function setLeadTeamId($teamId)
+    public function setLeadRosterId($rosterId)
     {
-        $this->leadTeamId = $teamId;
-    }
-
-
-    /*
-     * createUniqueId() calls CreateUniqueId class to generate a unique id passing
-     * Leader's first name and last name
-     *
-     * @param $firstName
-     * @param $lastName
-     * @return String unique created id
-     */
-    private function createUniqueId($firstName, $lastName)
-    {
-        include_once "../model/CreateUniqueId.php";
-        $this->uniqueIdObject = new CreateUniqueId();
-        return $this->uniqueIdObject->getUniqueId($firstName, $lastName);
+        $this->leadRosterId = $rosterId;
     }
 
 
     /**
-     * @return array Leader: First Name, Last Name, Username, Email, Phone, TeamId.
+     * @return array Leader: First Name, Last Name, Username, Email, Phone, RosterId.
      */
     public function _toString(){
         return array($this->getLeadFirstName(),$this->getLeadLastName(),$this->getLeadUsername(),$this->getLeadEmail(),
-                    $this->getLeadPhone(),$this->getLeadTeamId());
+                    $this->getLeadPhone(),$this->getLeadRosterId());
     }
 } // End of Leader class.
