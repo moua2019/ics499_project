@@ -13,6 +13,7 @@
 
 include_once "../model/Leader.php";
 include_once "../model/LeaderRepository.php";
+include_once "../model/RosterRepository.php";
 
 class UserController
 {
@@ -27,12 +28,58 @@ class UserController
     }
 
 
-    public function registerLeader($first, $last, $username, $email, $phone, $password, $teamId)
+    /**
+     * Creates a Leader object from user input to register into database
+     * @param $id Leader id
+     * @param $first String Leader First Name
+     * @param $last String Leader Last Name
+     * @param $username String Leader username
+     * @param $email String Leader email
+     * @param $phone String Leader phone
+     * @param $password String Leader password
+     * @param $teamId String Leader team id
+     * @return bool if user is added then it will display successful message,
+     *              otherwise it will display in the Signup form.
+     */
+    public function registerLeader($id, $first, $last, $username, $email, $phone, $password, $teamId)
     {
         $repository = new LeaderRepository();
-        $user = new Leader($username, $first, $last, $email, $phone, $password, $teamId);
+        $user = new Leader($id, $username, $first, $last, $email, $phone, $password, $teamId);
 
         return !($repository->addUser($user)) ? '../view/LeaderSignUp.php' : '../view/SignupConfirmation.php';
+    }
+
+    /**
+     * Creates a Roster object from user input to register into database
+     * @param $id
+     * @param $name
+     * @param $leader_id
+     * @param $numbOfPlayers
+     * @param $sport
+     * @param $playerArray
+     * @return bool if user is added then it will display successful message,
+     *              otherwise it will display in the Signup form.
+     */
+    public function registerRoster($id, $name, $leader_id, $numbOfPlayers, $sport, $playerArray )
+    {
+        // Creates a Roster object and add it to the database
+        $rosterRepo = new RosterRepository();
+        $roster = new Roster($id, $name, $numbOfPlayers, $sport, $leader_id);
+
+        // Crete a leader object
+
+        $isValid = !($rosterRepo->addRoster($roster)) ? false : true;
+
+        // Creates a Player object for each member of player array and adds
+        // it to the database
+        // TODO: create player object and add to db, make sure isValid checks success action
+
+        // If Roster registration succeed, add roster_id to leader table
+        $isValid = $this->updateLeaderRosterId($leader_id, $id) ? true : false;
+
+        // TODO:
+
+        return $isValid ?  '../view/LeaderInterface.php' : '../view/RosterRegistration.php' ;
     }
 
     /**
@@ -45,6 +92,20 @@ class UserController
 
         return $repository->getUserByUsername($username) ? true : false;
     }
+
+    /**
+     * @param $teamName String Team name to check if roster name exists
+     *          under this name
+     * @return bool true if roster name is found, false otherwise
+     */
+    public function teamNameExist($teamName)
+    {
+        $repository = new RosterRepository();
+
+        return $repository->getRosterByRosterName($teamName) ? true : false;
+    }
+
+
 
     /**
      * @param $username String user input
@@ -73,7 +134,7 @@ class UserController
     }
 
     /**
-     * @return mixed an array of Leader type objects
+     * @return array of Leader type objects
      */
     public function getAllLeaders()
     {
@@ -93,24 +154,24 @@ class UserController
     }
 
     /**
-     * @param String $username Leader username
-     * @param String $teamId used to update Leader team id
-     * @return bool True if leader team id is updated, false otherwise
+     * @param $leaderId
+     * @param $rosterId
+     * @return bool True if leader roster id is updated, false otherwise
      */
-    public function updateLeaderTeamId ($username, $teamId) {
-        if (!(empty($username) and empty($teamId))) {
+    public function updateLeaderRosterId ($leaderId, $rosterId) {
+        if (!(empty($leaderId) and empty($rosterId))) {
             $repository = new LeaderRepository();
-            return $repository->updateLeaderTeamId($username, $teamId);
+            return $repository->updateLeaderRosterId($leaderId, $rosterId);
         } else {
             return false;
         }
     }
 
     /**
-     * @param $teamId Leader teamID, used to retrieved Leader's Team Name
-     * @return string Name of the Team
+     * @param $rosterId Leader rosterID, used to retrieved Leader's Roster Name
+     * @return string Name of the Roster
      */
-    public function getTeam($teamId){
+    public function getTeam($rosterId){
         //TODO: get data from team table. For now return Team in Process
         return "--Getting Team Name in Process--";
     }

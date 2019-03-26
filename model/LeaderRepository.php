@@ -38,7 +38,7 @@ class LeaderRepository extends DataBaseConnection implements RepositoryInterface
 
     /**
      * @param Leader $userName Uses username to search user from Leader db
-     * @return mixed return UserInterface if exists, empty string otherwise.
+     * @return mixed return Leader if exists, empty string otherwise.
      */
     public function getUserByUsername($userName)
     {
@@ -53,7 +53,7 @@ class LeaderRepository extends DataBaseConnection implements RepositoryInterface
             // Return user if exists
             if ($stmt->rowCount()) {
                 while ($row = $stmt->fetch()) {
-                    $leader = new Leader($row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone'], $row['leader_pass'], $row['leader_team_id']);
+                    $leader = new Leader($row['leader_id'],$row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone'], $row['leader_pass'], $row['leader_roster_id']);
 
                     return $leader;
                 }
@@ -85,7 +85,7 @@ class LeaderRepository extends DataBaseConnection implements RepositoryInterface
         // Return user if exists
         if ($stmt->rowCount()) {
             while ($row = $stmt->fetch()) {
-                $leaderArray [] = new Leader($row['leader_id'],$row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone'], $row['leader_team_id']);
+                $leaderArray [] = new Leader($row['leader_id'],$row['leader_username'],$row['leader_firstName'],$row['leader_lastName'],$row['leader_email'],$row['leader_phone'], $row['leader_pass'], $row['leader_roster_id']);
             }
 
         }
@@ -130,17 +130,17 @@ class LeaderRepository extends DataBaseConnection implements RepositoryInterface
     }
 
     /**
-     * @param String $username used to update Leader team id
-     * @param String $teamId Team Id to insert into db
+     * @param $leaderId
+     * @param String $rosterId Roster Id to insert into db
      * @return bool True if update is successful, false otherwise.
      */
-    public function updateLeaderTeamId ($username, $teamId) {
-        if (!is_null($teamId)){
+    public function updateLeaderRosterId ($leaderId, $rosterId) {
+        if (!is_null($rosterId)){
             // Prepare statement
-            $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_team_id = ? WHERE leader_username = ?");
+            $stmt = $this->getDbc()->prepare("UPDATE Leader SET leader_roster_id = ? WHERE leader_id = ?");
 
-            // Execute statement / add teamId to Leader table
-            return !($stmt->execute([$teamId, $username])) ? false : true;
+            // Execute statement / add rosterId to Leader table
+            return !($stmt->execute([$rosterId, $leaderId])) ? false : true;
 
         }
     }
