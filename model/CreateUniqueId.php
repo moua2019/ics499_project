@@ -48,7 +48,14 @@ class CreateUniqueId
 
     private function getFirstThreeChar($name)
     {
-        return substr($name,0,3);
+        $three = "";
+        for ($i = 0; $i < 2; $i++){
+            $letter = substr($name, $i, $i + 1);
+            if (!($letter == " ")){
+                $three .= trim($letter);
+            }
+        }
+        return $three;
 
     }
 
