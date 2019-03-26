@@ -304,9 +304,3 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     padding: 50px;
     text-align: center;
 }
-
-/* Style each tab content individually */
-#London {background-color:red;}
-#Paris {background-color:green;}
-#Tokyo {background-color:blue;}
-#Oslo {background-color:orange;}
