@@ -102,7 +102,7 @@
         <i class="fa fa-pinterest-p flip-hover-opacity"></i>
         <i class="fa fa-twitter flip-hover-opacity"></i>
         <i class="fa fa-linkedin flip-hover-opacity"></i>
-    </div>linda h. moua - test3
+    </div>linda h. moua - test4
 </footer>
 
 <script>
