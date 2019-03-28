@@ -13,6 +13,16 @@
 
 session_start();
 
+// Constant array for Volleyball Positions
+define('VOLLEYBALL_POSITIONS', array(
+    'opposite',
+    'outside hitter',
+    'libero',
+    'setter',
+    'right side hitter',
+    'middle blocker'
+));
+
 if (!isset($_SESSION['temp_roster_name'])) {
     // Redirect leader to VolleyBallSignUp.php
     header('location: "VolleyBallSignUp.php');
@@ -20,7 +30,7 @@ if (!isset($_SESSION['temp_roster_name'])) {
     exit();
 } else {
 
-    $pageTitle = "SignUp";
+    $pageTitle = "TeamRegistration";
     include "Header.php";
     include "Logo.php";
 
@@ -44,18 +54,21 @@ if (!isset($_SESSION['temp_roster_name'])) {
     // To display 6 players
     for ($i = 1; $i <= 6; $i++) {
         echo " 
-                    <p class=\"flip-left flip-light-green flip-small flip-margin-top \" style=\"width: 100%; margin-bottom: 5px;\">Player $i</p>
+                    <p class=\"flip-left flip-light-green flip-small flip-margin-top \" style=\"width: 100%; margin-bottom: 5px;\">Player $i &emsp; " . strtoupper(VOLLEYBALL_POSITIONS[$i - 1]) . "</p>
                     
                     <!-- -16 and margin '0' is to display all fields using the whole grid -->
                     <div class=\"flip-row-padding\" style=\"margin:0 -16px;\">  
-                        <div class=\"flip-third flip-small\">
+                        <div class=\"flip-col l3 m3  flip-small\">
                             <input class=\"flip-input flip-border\" type=\"text\" placeholder=\"First Name\" name=\"plyr" . $i . "_fName\" required>
                         </div>
-                        <div class=\"flip-third flip-small\">
+                        <div class=\"flip-col l3 m3  flip-small\">
                             <input class=\"flip-input flip-border\" type=\"text\" placeholder=\"Last Name\" name=\"plyr" . $i . "_lName\" required>
                         </div>
-                        <div class=\"flip-third flip-small\">
+                        <div class=\"flip-col l3 m3  flip-small\">
                             <input class=\"flip-input flip-border\" type=\"tel\" maxlength=\"10\" placeholder=\"Phone\" name=\"plyr" . $i . "_phone\" required>
+                        </div>
+                        <div class=\"flip-col l3 m3  flip-small\">
+                            <input class=\"flip-input flip-border\" type=\"text\"  placeholder=\"T-shirt Number\" name=\"plyr" . $i . "_t_shirt_number\" required>
                         </div>
                     </div>
         ";
@@ -72,7 +85,7 @@ if (!isset($_SESSION['temp_roster_name'])) {
                 </form>
                 <div class=\"flip-small flip-bar-item flip-clear flip-center flip-margin-bottom\">
                     <a class=\"flip-small flip-bar-item flip-hover-text-green \" href=\"LeaderInterface.php\" style=\"text-decoration: none !important\">
-                        <i class=\"flip-animate-left\">Return to</i><i class=\"flip-animate-right\"> Leader page</i>
+                        <i class=\"flip-animate-left\">Cancel</i>
                     </a>
                     <a class=\"flip-small flip-bar-item flip-hover-text-green flip-margin-left\" href=\"Logout.php\" style=\"text-decoration: none !important\">
                         <i class=\"flip-animate-left\">Logout</i>

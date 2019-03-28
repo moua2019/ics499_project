@@ -24,12 +24,12 @@ class RosterRepository extends DataBaseConnection
      */
     public function addRoster(Roster $roster)
     {
-        $stmt = $this->getDbc()->prepare("INSERT INTO TempRoster (temp_roster_id, temp_roster_name, number_of_players, sport_type, leader_id)
-                                              VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->getDbc()->prepare("INSERT INTO Roster (roster_id, roster_name, registration_date, number_of_players, sport_type, leader_id)
+                                              VALUES (?, ?, ?, ?, ?,?)");
 
-        echo 'roster leader id:' . $roster->getLeaderId();
+        $current_date =  date("Y-m-d");
 
-        return !($stmt->execute([$roster->getId(), $roster->getRosterName(),
+        return !($stmt->execute([$roster->getId(), $roster->getRosterName(), $current_date,
             $roster->getNumberOfPlayers(), $roster->getSportType(),$roster->getLeaderId()])) ? false : true ;
     }
 
