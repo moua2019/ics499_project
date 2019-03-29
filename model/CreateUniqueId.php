@@ -23,7 +23,7 @@ class CreateUniqueId
 {
     private $uniqueId;
 
-    public function CreateUniqueId(){
+    public function _CreateUniqueId(){
 
     }
 

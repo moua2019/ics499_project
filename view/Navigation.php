@@ -68,7 +68,7 @@ if (isset($_SESSION['username'])){
     }
 
 
-} else { // Leader Navigation
+} else { // Home Navigation
     $SignUp_LogOut = "Sign Up";
     $SignUp_LogOut_URL = "LeaderSignUp.php";
     echo "  

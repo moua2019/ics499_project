@@ -14,6 +14,9 @@
 include_once "../model/Leader.php";
 include_once "../model/LeaderRepository.php";
 include_once "../model/RosterRepository.php";
+include_once "../model/Player.php";
+include_once "../model/PlayerRepository.php";
+include_once "../model/CreateUniqueId.php";
 
 class UserController
 {
@@ -51,7 +54,7 @@ class UserController
 
     /**
      * Creates a Roster object from user input to register into database
-     * @param $id
+     * @param $roster_id
      * @param $name
      * @param $leader_id
      * @param $numbOfPlayers
@@ -60,26 +63,72 @@ class UserController
      * @return bool if user is added then it will display successful message,
      *              otherwise it will display in the Signup form.
      */
-    public function registerRoster($id, $name, $leader_id, $numbOfPlayers, $sport, $playerArray )
+    public function registerRoster($roster_id, $name, $leader_id, $numbOfPlayers, $sport, $playerArray )
     {
         // Creates a Roster object and add it to the database
         $rosterRepo = new RosterRepository();
-        $roster = new Roster($id, $name, $numbOfPlayers, $sport, $leader_id);
+        $roster = new Roster($roster_id, $name, $numbOfPlayers, $sport, $leader_id);
 
-        // Crete a leader object
+        $isValid = false;
 
-        $isValid = !($rosterRepo->addRoster($roster)) ? false : true;
+        // Add  Roster to db
+        if ($rosterRepo->addRoster($roster)) {
+            $isValid = true;
+        }
 
-        // Creates a Player object for each member of player array and adds
-        // it to the database
-        // TODO: create player object and add to db, make sure isValid checks success action
+        // Add Players
+        if ($this->addPlayerArrayToDb($playerArray, $roster_id)) {
+            $isValid = true;
+        }
 
         // If Roster registration succeed, add roster_id to leader table
-        $isValid = $this->updateLeaderRosterId($leader_id, $id) ? true : false;
+        if ($this->updateLeaderRosterId($leader_id, $roster_id)){
+            $isValid = true;
+        }
 
-        // TODO:
+        // Redirect User
+        return $isValid ?  '../view/LeaderInterface.php' : '../view/VolleyballRosterRegistration.php' ;
+    }
 
-        return $isValid ?  '../view/LeaderInterface.php' : '../view/RosterRegistration.php' ;
+
+    /*
+     * @param $plyrArray
+     * @param $rosterID
+     * @return bool true if all the players are added to db, false otherwise
+     */
+    private function addPlayerArrayToDb($plyrArray, $rosterID) {
+        $isAdded = false;
+
+        foreach ($plyrArray as $item => $value) {
+            $isAdded = $this->registerPlayer($value['fname'], $value['lname'], $value['phone'],
+                $value['shirt'], $value['position'], $rosterID) ? true : false;
+        }
+
+        return $isAdded;
+    }
+
+    /**
+     * @param $fName
+     * @param $lName
+     * @param $phone
+     * @param $shirt
+     * @param $position
+     * @param $rosterID
+     * @return bool true if player is added to db, false otherwise
+     */
+    public function registerPlayer($fName, $lName, $phone, $shirt, $position, $rosterID) {
+        // Create unique id for player
+        $uniqueIdObj = new CreateUniqueId();
+        $id = $uniqueIdObj->getUniqueId($fName,$lName);
+
+        // Create PlayerRepository Object
+        $plyrRepo = new PlayerRepository();
+
+        // Create a Player object
+        $player = new Player($id, $fName, $lName, $phone, $shirt, $position, $rosterID);
+
+        // Add player to Repository and return results
+        return $plyrRepo->addUser($player); // True if player is added to db
     }
 
     /**
@@ -171,9 +220,29 @@ class UserController
      * @param $rosterId Leader rosterID, used to retrieved Leader's Roster Name
      * @return string Name of the Roster
      */
-    public function getTeam($rosterId){
+    public function getTeamNameByRosterId($rosterId){
         //TODO: get data from team table. For now return Team in Process
+        if (!empty($rosterId)){
+            $rosterRepo = new RosterRepository();
+
+            $roster = $rosterRepo->getRosterByRosterId($rosterId);
+
+            $teamName = !empty($roster) ? $roster->getRosterName() : "No Team Name Found";
+
+            return $teamName;
+        }
         return "--Getting Team Name in Process--";
+    }
+
+    /**
+     * @param $username
+     * @return String LeaderRoster id if exists, empty string otherwise.
+     */
+    public function getLeaderTeamId($username)
+    {
+        $leader = $this->getLeader($username);
+
+        return $leader->getLeadRosterId();
     }
 
 } // End of UserController class.

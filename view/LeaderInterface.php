@@ -26,7 +26,18 @@
     if (isset($_SESSION['leader_has_Team'])){
         $leader_has_team = true;
     } else {
-        $leader_has_team = false;
+        $teamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
+        if (!(empty($teamId))) {
+            $_SESSION['leader_has_Team'] = true;
+            $_SESSION['leader_team_id'] = $teamId;
+
+            $leadInterface = $_SERVER['REQUEST_URI'];
+            $nav = " ../view/Navigation.php";
+            header("Refresh: 0; URL = $nav "); // Refresh navigation page
+            header("Refresh: 0; URL = $leadInterface ");
+        } else {
+            $leader_has_team = false;
+        }
     }
 
     $leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
@@ -40,7 +51,7 @@
     $teamId = $leaderInfoArray[5];
 
     // Get Team Name using teamId
-    $leaderTeam = !empty($teamId) ? $controllerObj->getTeam($teamId) : "No Team";
+    $leaderTeam = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
 
     // Format phone number if not empty
     if (empty($tempPhone)) {

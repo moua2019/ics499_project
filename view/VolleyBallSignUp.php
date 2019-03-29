@@ -68,7 +68,7 @@ if (!isset($_SESSION['username'])) {
                     $_SESSION['temp_roster_name'] = $team_name;
 
                     // Redirect to PlayersRegistration
-                    header("location: RosterRegistration.php");
+                    header("location: VolleyballRosterRegistration.php");
 
                     // Exit the page
                     exit();
@@ -97,8 +97,8 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </form>
             <div class=\"flip-small flip-bar-item flip-clear flip-center flip-margin-bottom\">
-                <a class=\"flip-small flip-bar-item flip-hover-text-green \" href=\"LeaderInterface.php\" style=\"text-decoration: none !important\">
-                    <i class=\"flip-animate-left\">Return to</i><i class=\"flip-animate-right\"> Leader page</i>
+                <a class=\"flip-small flip-bar-item flip-hover-text-red \" href=\"Cancel.php\" style=\"text-decoration: none !important\">
+                    <i class=\"flip-animate-left\">Can</i><i class=\"flip-animate-right\">cel</i>
                 </a>
             </div>
         </div>

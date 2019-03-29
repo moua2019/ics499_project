@@ -22,7 +22,7 @@ if (isset($_SESSION ['username'])){
     session_destroy(); // Destroy session itself.
     setcookie(session_name(), '', time()-3600); // Destroy the cookie.
 
-    // Redirect to elTrebol_home.php
+    // Redirect to Home.php
     header("Location:" . $home_page);
     exit();
 } else {

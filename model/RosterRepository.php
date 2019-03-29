@@ -41,7 +41,7 @@ class RosterRepository extends DataBaseConnection
     {
         $roster = "";
         if (!empty($rosterName)) {
-            // Get leader from database
+            // Get Roster from database
             $stmt = $this->getDbc()->prepare("SELECT * FROM Roster WHERE roster_name = ?");
 
             // Execute statement
@@ -71,5 +71,34 @@ class RosterRepository extends DataBaseConnection
     public function getRosters()
     {
         // TODO: Implement getUsers() method.
+    }
+
+    /**
+     * @param $rosterId
+     * @return mixed Roster object if $rosterId is not empty, empty string otherwise
+     */
+    public function getRosterByRosterId ($rosterId)
+    {
+        $roster = "";
+        if (!empty($rosterId)){
+            // Get Roster from database
+            $stmt = $this->getDbc()->prepare("SELECT * FROM Roster WHERE roster_id = ?");
+
+            // Execute statement
+            $stmt->execute([$rosterId]);
+
+            // Return user if exists
+            if ($stmt->rowCount()) {
+                while ($row = $stmt->fetch()) {
+                    $roster = new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
+
+                }
+
+                return $roster;
+
+            } else {
+                return $roster;
+            }
+        }
     }
 } // End of RosterRepository class.

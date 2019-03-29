@@ -2,7 +2,7 @@
 /**
  * Project: ics499_project
  *
- * RosterRegistration.php:
+ * VolleyballRosterRegistration.php:
  *
  * Initial version by: Franklin Ortega.
  * Initial version on: 2019-03-24 23:57
@@ -51,25 +51,29 @@ if (!isset($_SESSION['temp_roster_name'])) {
                             <i class='flip-bolder flip-blue-499 flip-padding-small flip-round-medium '>$teamName</i></p>
                     <p class='flip-center flip-green flip-padding-small'>Players Information</p>";
 
+    $plyrArray = array();
+
     // To display 6 players
     for ($i = 1; $i <= 6; $i++) {
+        $position = VOLLEYBALL_POSITIONS[$i - 1];
         echo " 
-                    <p class=\"flip-left flip-light-green flip-small flip-margin-top \" style=\"width: 100%; margin-bottom: 5px;\">Player $i &emsp; " . strtoupper(VOLLEYBALL_POSITIONS[$i - 1]) . "</p>
+                    <p class=\"flip-left flip-light-green flip-small flip-margin-top \" style=\"width: 100%; margin-bottom: 5px;\">Player $i &emsp; " . strtoupper($position) . "</p>
                     
                     <!-- -16 and margin '0' is to display all fields using the whole grid -->
                     <div class=\"flip-row-padding\" style=\"margin:0 -16px;\">  
                         <div class=\"flip-col l3 m3  flip-small\">
-                            <input class=\"flip-input flip-border\" type=\"text\" placeholder=\"First Name\" name=\"plyr" . $i . "_fName\" required>
+                            <input class=\"flip-input playerFname flip-border\" type=\"text\"  placeholder=\"First Name\" name=\"plyrFnameArray[]\" required>
                         </div>
                         <div class=\"flip-col l3 m3  flip-small\">
-                            <input class=\"flip-input flip-border\" type=\"text\" placeholder=\"Last Name\" name=\"plyr" . $i . "_lName\" required>
+                            <input class=\"flip-input playerLname flip-border\" type=\"text\"  placeholder=\"Last Name\"  name=\"plyrLnameArray[]\" required>
                         </div>
                         <div class=\"flip-col l3 m3  flip-small\">
-                            <input class=\"flip-input flip-border\" type=\"tel\" maxlength=\"10\" placeholder=\"Phone\" name=\"plyr" . $i . "_phone\" required>
+                            <input class=\"flip-input playerPhone flip-border\" type=\"tel\"  maxlength=\"10\" placeholder=\"Phone\" name=\"plyrPhoneArray[]\" required>
                         </div>
                         <div class=\"flip-col l3 m3  flip-small\">
-                            <input class=\"flip-input flip-border\" type=\"text\"  placeholder=\"T-shirt Number\" name=\"plyr" . $i . "_t_shirt_number\" required>
+                            <input class=\"flip-input playerShirt flip-border\" type=\"number\"  placeholder=\"T-shirt Number\" name=\"plyrShirtArray[]\" required>
                         </div>
+                        <input type='hidden' name='positionArray[]' value=\"$position\">
                     </div>
         ";
     } // End of loop
@@ -79,12 +83,13 @@ if (!isset($_SESSION['temp_roster_name'])) {
                     <input type='hidden' name='sport_type' value='Volleyball'>
                     <input type='hidden' name='total_players' value='6'> 
                     <div class=\"flip-col flip-center flip-margin-top flip-bottombar\" style=\"margin-bottom: 15px !important;\">
-                        <button class=\"flip-hover-green flip-round-large flip-black flip-padding flip-center flip-margin-bottom\"  type=\"submit\" name=\"register\" value=\"signup\">SIGN UP</button>
+                <!--        <button class=\"flip-hover-green flip-round-large flip-black flip-padding flip-center flip-margin-bottom\"  type=\"submit\" id='submitBttn' name=\"register\" value=\"signup\" disabled>SIGN UP</button>
+                 -->       <button class=\"flip-hover-green flip-round-large flip-black flip-padding flip-center flip-margin-bottom\"  type=\"submit\" id='submitBttn' name=\"register\" value=\"signup\" >SIGN UP</button>
                     
                     </div>
                 </form>
                 <div class=\"flip-small flip-bar-item flip-clear flip-center flip-margin-bottom\">
-                    <a class=\"flip-small flip-bar-item flip-hover-text-green \" href=\"LeaderInterface.php\" style=\"text-decoration: none !important\">
+                    <a class=\"flip-small flip-bar-item flip-hover-text-red \" href=\"Cancel.php\" style=\"text-decoration: none !important\">
                         <i class=\"flip-animate-left\">Cancel</i>
                     </a>
                     <a class=\"flip-small flip-bar-item flip-hover-text-green flip-margin-left\" href=\"Logout.php\" style=\"text-decoration: none !important\">
@@ -95,5 +100,32 @@ if (!isset($_SESSION['temp_roster_name'])) {
         </div>
     ";
 
-}
+} // End of if{} else{}
 
+?>
+
+<script>
+    // const plyrFname = document.getElementsByClassName('playerFname');
+    // const plyrLname = document.getElementsByClassName('playerLname');
+    // const plyrPhone = document.getElementsByClassName('playerPhone');
+    // const plyrShirt = document.getElementsByClassName('playerShirt');
+    // const submitBttn  = document.getElementById('submitBttn');
+    //
+    // for(let i = 0; i < plyrShirt.length; i++)
+    // {
+    //     let isValidShirt = true;
+    //     let n = 0;
+    //     plyrShirt[i].addEventListener('keyup', function (event) {
+    //         let value = plyrShirt[i].value;
+    //         let reg = new RegExp('^\\d+$');
+    //         isValidShirt =  !value.match(reg);
+    //
+    //         // plyrFname[i].style.backgroundColor = 'red';
+    //     });
+    //
+    //     isValidShirt ? plyrFname[i].style.backgroundColor = 'red' : ;
+    //     submitBttn.disabled = isValidShirt; // If all fields are valid  disable will be false
+    // }
+
+
+</script>
