@@ -55,8 +55,18 @@ class CreateUniqueId
                 $three .= trim($letter);
             }
         }
-        return $three;
+        switch (sizeof($three)) {
+            case 2:
+                $one = rand(0,9);
+                $three .= $three . $one;
+                break;
+            case 1:
+                $two = rand(0,9) . rand(0,9);
+                $three .= $three . $two;
+                break;
+        }
 
+        return $three;
     }
 
     /*
