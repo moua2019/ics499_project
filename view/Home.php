@@ -55,11 +55,15 @@
     <div class="flip-content flip-margin-right">
         <div class="flip-twothird flip-padding">
             <h1>League Information</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h5 class="flip-padding-32">XYZ Sports, Volleyball is a league dedicated to “Creating Competitive Athletes” by building each player’s self-esteem, teaching each player the physical and mental fundamentals of the game, giving each player equal playing time, teaching good sportsmanship and the value of playing as a team. </h5>
+            <br class="flip-text-grey"><b>WHERE:</b> Practices & Games will be held at Rolling Meadows Center - Court 1A
+                <br><b>WHEN:</b> We have two seasons each year
+                Spring Season runs from March-May
+                Fall Season runs from October-August
+                <br><b>AGES:</b> 18+
+                <br><b>REGISTRATION FEE:</b> $25 per player
+                <br><em>*Space is limited and registration will be taken on a first-come, first-serve basis.*</em>
+            <br><b>REGISTRATION:</b></br> Registration will end once a division is full. League Apps will start a waiting list once a division is full. Each division will vary on how fast it fills up, so it is best to secure your spot early.</p>
         </div>
 
         <div class="flip-third flip-center flip-margin\">
@@ -78,11 +82,8 @@
 
         <div class="flip-twothird">
             <h1>Volleyball</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="flip-text-grey">The objective of the game is to legally return the ball over the net in such a manner that the opponent’s team cannot make a legal return. The main causes of illegal plays are: holding, carrying, or lifting with the palm of the hands, four touches on one side, and two consecutive touches by one player. A regulation game is played with six players on the court. They are to rotate to serve in a clockwise direction when facing the net. The server will come from the right front position, serve, then play the right back position..<br>
+                <br>Volleyball is a team sport. The teams are separated by a large net. It has six players on each side of the net. Each team is allowed twelve substitution players. The game starts when the captain from each team decides which side of the court they will play on, by the toss of a coin, which also determines who will serve (hit) the ball first. The point of the game is to keep the ball in the air. The ball can be played with any part of the body, with a maximum of three strokes a team. If at any point the ball hits the floor, the side that the ball landed on it is a point for the other team</p>
         </div>
     </div>
 </div>
