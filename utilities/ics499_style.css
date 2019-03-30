@@ -163,7 +163,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .flip-sepia{filter:sepia(75%)}.flip-sepia-max,.flip-hover-sepia:hover{filter:sepia(100%)}.flip-sepia-min{filter:sepia(50%)}
 .flip-xxtiny{font-size:6px!important}.flip-xtiny{font-size:8px!important}.flip-tiny{font-size:10px!important}.flip-small{font-size:12px!important}.flip-medium{font-size:15px!important}.flip-large{font-size:18px!important}
 .flip-xlarge{font-size:24px!important}.flip-xxlarge{font-size:36px!important}.flip-xxxlarge{font-size:48px!important}.flip-jumbo{font-size:64px!important}.flip-xjumbo{font-size:100px !important}
-.flip-bold {font-weight: bold !important}.flip-bolder{font-weight: bolder}
+.flip-bold {font-weight: bold !important}.flip-bolder{font-weight: bolder}.flip-bold-900{font-weight: 900}
 .flip-left-align{text-align:left!important}.flip-right-align{text-align:right!important}.flip-justify{text-align:justify!important}.flip-center{text-align:center!important}
 .flip-border-0{border:0!important}.flip-border{border:1px solid #ccc!important}
 .flip-border-top{border-top:1px solid #ccc!important}.flip-border-bottom{border-bottom:1px solid #ccc!important}

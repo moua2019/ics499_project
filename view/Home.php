@@ -52,37 +52,38 @@
 <!-- First Grid -->
 <div class="flip-row-padding flip-padding-32 flip-container" id="text"
      style="text-align: justify;text-justify: inter-word;">
-    <div class="flip-padding flip-margin-right">
+    <div class="flip-third flip-right flip-margin\">
+        <img src="../images/all_sports.jpeg" class="flip-card-4" style="width: 100%; height: 300px">
+    </div>
+    <div class="flip-padding flip-margin-right ">
         <div class="flip-twothird flip-padding">
-            <h1>League Information</h1>
-            <h5 class="flip-padding-32">XYZ Sports, Volleyball is a league dedicated to “Creating Competitive Athletes” by building each player’s self-esteem, teaching each player the physical and mental fundamentals of the game, giving each player equal playing time, teaching good sportsmanship and the value of playing as a team. </h5>
-            <p><br class="flip-text-grey"><b>WHERE:</b> Practices & Games will be held at Rolling Meadows Center - Court 1A
-                <br><b>WHEN:</b> We have two seasons each year
-                Spring Season runs from March-May
-                Fall Season runs from October-August
-                <br><b>AGES:</b> 18+
-                <br><b>REGISTRATION FEE:</b> $25 per player
-                <br><em>*Space is limited and registration will be taken on a first-come, first-serve basis.*</em>
-            <br><b>REGISTRATION:</b></br> Registration will end once a division is full. League Apps will start a waiting list once a division is full. Each division will vary on how fast it fills up, so it is best to secure your spot early.</p>
-        </div>
-
-        <div class="flip-third flip-center flip-margin\">
-            <img src="../images/all_sports.jpeg" style="width: 100%; height: 300px">
+            <h1 class="flip-center flip-bolder">League Information</h1>
+            <div class="flip-margin-right flip-text-dark-gray">
+                <p>XYZ Sports, Volleyball is a league dedicated to “Creating Competitive Athletes” by building each player’s self-esteem, teaching each player the physical and mental fundamentals of the game, giving each player equal playing time, teaching good sportsmanship and the value of playing as a team. </p>
+                <p><b>WHERE:</b> Practices & Games will be held at Rolling Meadows Center - Court 1A
+                    <br><b>WHEN:</b> We have two seasons each year
+                    Spring Season runs from March-May
+                    Fall Season runs from October-August
+                    <br><b>AGES:</b> 18+
+                    <br><b>REGISTRATION FEE:</b> $25 per player
+                    <br><em>*Space is limited and registration will be taken on a first-come, first-serve basis.*</em>
+                <br><b>REGISTRATION:</b></br> Registration will end once a division is full. League Apps will start a waiting list once a division is full. Each division will vary on how fast it fills up, so it is best to secure your spot early.</p>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Second Grid -->
-<div id="volleyText" class="flip-row-padding flip-light-grey flip-padding-64 flip-container"
+<div id="volleyText" class="flip-row-padding flip-padding-64 flip-container"
      style="text-align: justify;text-justify: inter-word;">
     <div class="flip-content">
         <div class="flip-third flip-center">
             <img src="../images/volleball-ball.jpeg" class="flip-circle flip-card-4">
         </div>
 
-        <div class="flip-twothird">
-            <h1>Volleyball</h1>
-            <p class="flip-text-grey">The objective of the game is to legally return the ball over the net in such a manner that the opponent’s team cannot make a legal return. The main causes of illegal plays are: holding, carrying, or lifting with the palm of the hands, four touches on one side, and two consecutive touches by one player. A regulation game is played with six players on the court. They are to rotate to serve in a clockwise direction when facing the net. The server will come from the right front position, serve, then play the right back position..<br>
+        <div class="flip-twothird flip-padding">
+            <h1 class="flip-center flip-bolder">Volleyball</h1>
+            <p class="flip-text-dark-grey flip-margin-left">The objective of the game is to legally return the ball over the net in such a manner that the opponent’s team cannot make a legal return. The main causes of illegal plays are: holding, carrying, or lifting with the palm of the hands, four touches on one side, and two consecutive touches by one player. A regulation game is played with six players on the court. They are to rotate to serve in a clockwise direction when facing the net. The server will come from the right front position, serve, then play the right back position..<br>
                 <br>Volleyball is a team sport. The teams are separated by a large net. It has six players on each side of the net. Each team is allowed twelve substitution players. The game starts when the captain from each team decides which side of the court they will play on, by the toss of a coin, which also determines who will serve (hit) the ball first. The point of the game is to keep the ball in the air. The ball can be played with any part of the body, with a maximum of three strokes a team. If at any point the ball hits the floor, the side that the ball landed on it is a point for the other team</p>
         </div>
     </div>
@@ -103,7 +104,7 @@
         <i class="fa fa-pinterest-p flip-hover-opacity"></i>
         <i class="fa fa-twitter flip-hover-opacity"></i>
         <i class="fa fa-linkedin flip-hover-opacity"></i>
-    </div>linda h. moua - test3
+    </div>
 </footer>
 
 <script>
