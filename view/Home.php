@@ -52,11 +52,11 @@
 <!-- First Grid -->
 <div class="flip-row-padding flip-padding-32 flip-container" id="text"
      style="text-align: justify;text-justify: inter-word;">
-    <div class="flip-content flip-margin-right">
+    <div class="flip-padding flip-margin-right">
         <div class="flip-twothird flip-padding">
             <h1>League Information</h1>
             <h5 class="flip-padding-32">XYZ Sports, Volleyball is a league dedicated to “Creating Competitive Athletes” by building each player’s self-esteem, teaching each player the physical and mental fundamentals of the game, giving each player equal playing time, teaching good sportsmanship and the value of playing as a team. </h5>
-            <br class="flip-text-grey"><b>WHERE:</b> Practices & Games will be held at Rolling Meadows Center - Court 1A
+            <p><br class="flip-text-grey"><b>WHERE:</b> Practices & Games will be held at Rolling Meadows Center - Court 1A
                 <br><b>WHEN:</b> We have two seasons each year
                 Spring Season runs from March-May
                 Fall Season runs from October-August
