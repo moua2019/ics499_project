@@ -18,12 +18,14 @@
 
 // Default time set to Central Time
 date_default_timezone_set("America/Belize");
+include_once "../utilities/CleanData.php";
 
 class CreateUniqueId
 {
     private $uniqueId;
 
-    public function _CreateUniqueId(){
+    public function _CreateUniqueId()
+    {
 
     }
 
@@ -32,41 +34,74 @@ class CreateUniqueId
      * @param $lastName
      * @return mixed
      */
-    public function getUniqueId($firstName, $lastName){
+    public function getUniqueId($firstName, $lastName)
+    {
         $this->setUniqueId($firstName, $lastName);
         return $this->uniqueId;
     }
 
-    private function setUniqueId($firstName, $lastName){
-        $sub_3_fname = $this->getFirstThreeChar($firstName);
-        $sub_3_lname = $this->getFirstThreeChar($lastName);
+    private function setUniqueId($firstName, $lastName)
+    {
+        $clean = new CleanData();
+
+        $first = $clean->getVarClean($firstName);
+        $last = $clean->getVarClean($lastName);
+
+        $sub_3_fname = $this->getThreeChar($first);
+        $sub_3_lname = $this->getThreeChar($last);
         $date_str = $this->getCurrentDateAndTime();
 
         $this->uniqueId = $sub_3_fname . $date_str . $sub_3_lname;
     }
 
-
-    private function getFirstThreeChar($name)
+    /*
+     * Return three characters taken from the first three letters of $name.
+     * If name has blank spaces in between it will be replaced with the next letter
+     * or if $name is less than length of 3, then missing letters will be generated
+     * randomly.
+     */
+    private function getThreeChar($name)
     {
-        $three = "";
-        for ($i = 0; $i < 2; $i++){
-            $letter = substr($name, $i, $i + 1);
-            if (!($letter == " ")){
-                $three .= trim($letter);
+
+        // If name is empty return Three random numbers
+        if (empty(trim($name))) {
+            return $this->getLetter(rand(0, 51)) . $this->getLetter(rand(0, 51)) . $this->getLetter(rand(0, 51));
+        }  else {
+            $three = "";
+
+            for ($i = 0; $i < 3; $i++) {
+                $c = trim(substr($name, $i - 1, $i ));
+
+                $letter = is_numeric($c) ? $this->getLetter(rand(0,51)) : $c;
+
+                $three .= filter_var($letter, FILTER_SANITIZE_STRING );
+
+            }
+
+            switch (strlen($three)) {
+                case 2:
+                    return $three . $this->getLetter(rand(0, 51));
+                    break;
+                case 1:
+                    return $three . $this->getLetter(rand(0, 51)) . $this->getLetter(rand(0, 51));
+                    break;
+                case 0:
+                    return $this->getLetter(rand(0, 51)) . $this->getLetter(rand(0, 51)) . $this->getLetter(rand(0, 51));;
+                default:
+                    return $three;
+                    break;
             }
         }
-        switch (sizeof($three)) {
-            case 2:
-                $one = rand(0,9);
-                $three .= $three . $one;
-                break;
-            case 1:
-                $two = rand(0,9) . rand(0,9);
-                $three .= $three . $two;
-                break;
-        }
+    }
 
-        return $three;
+    /*
+     * Return a letter using number to get letter from alphabet array
+     */
+    private function getLetter($number){
+        // Generate Alphabet upper and lower case
+        $alphabet = array_merge(range('A', 'Z'), range('a', 'z'));
+
+        return $alphabet[$number];
     }
 
     /*
