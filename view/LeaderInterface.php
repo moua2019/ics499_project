@@ -10,37 +10,51 @@
  * Last update by:
  * Last update on:
  */
-    session_start();
+session_start();
 
-    $pageTitle = "Leader";
-    include "Header.php";
-    include "Navigation.php";
-    include_once "../utilities/FormatPhone.php";
-    include_once "../controller/UserController.php";
+$pageTitle = "Leader";
+include "Header.php";
+include "Navigation.php";
+include_once "../utilities/FormatPhone.php";
+include_once "../controller/UserController.php";
+include_once "../controller/PlayerController.php";
+include_once "../model/Player.php";
 
-    // Instantiate respective classes
-    $controllerObj = new UserController();
-    $phoneFormatObj = new FormatPhone();
+// Instantiate respective classes
+$controllerObj = new UserController();
+$phoneFormatObj = new FormatPhone();
+$playerCtrlObj = new PlayerController();
 
-    // Display Leader's team if Leader has a team
-    if (isset($_SESSION['leader_has_Team'])){
-        $leader_has_team = true;
+// Display Leader's team if Leader has a team
+if (isset($_SESSION['leader_has_Team'])) {
+    $leader_has_team = true;
+} else {
+    $teamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
+    if (!(empty($teamId))) {
+        $_SESSION['leader_has_Team'] = true;
+        $_SESSION['leader_team_id'] = $teamId;
+
+        $leadInterface = $_SERVER['REQUEST_URI'];
+        $nav = " ../view/Navigation.php";
+        header("Refresh: 0; URL = $nav "); // Refresh navigation page
+        header("Refresh: 0; URL = $leadInterface ");
     } else {
-        $teamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
-        if (!(empty($teamId))) {
-            $_SESSION['leader_has_Team'] = true;
-            $_SESSION['leader_team_id'] = $teamId;
-
-            $leadInterface = $_SERVER['REQUEST_URI'];
-            $nav = " ../view/Navigation.php";
-            header("Refresh: 0; URL = $nav "); // Refresh navigation page
-            header("Refresh: 0; URL = $leadInterface ");
-        } else {
-            $leader_has_team = false;
-        }
+        $leader_has_team = false;
     }
+}
 
-    $leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
+// Getting Leader information
+$leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
+
+// Getting Player information
+$leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
+$playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
+
+echo "<Br><br><br> Player array length:" . sizeof($playerArray);
+foreach ($playerArray as $plyr) {
+    echo "Testing 2";
+    echo "<br><br><br>Player: " . $plyr->getPlyrFname() . " " . $plyr->getPlyrLname() . " " . $plyr->getPlyrTshirtNumber()  . " " .  $plyr->getPlyrPhone() . " " . $plyr->getPlyrPosition() . "<br>" ;
+ }
 
     // Leader array is composed by First Name, Last Name, Username, Email, Phone, TeamId.
     $fName = $leaderInfoArray[0];
@@ -64,7 +78,7 @@
 
 <!-- Header -->
 <header class="flip-container flip-bg-gradient-red flip-center" style="padding:70px 16px; height: 700px">
-<?php echo "
+    <?php echo "
     <!-- Display Leader profile-->
     <div id=\"Profile\" class=\"tabcontent\">
         <h1 class='flip-bolder'>Profile</h1>
@@ -106,14 +120,16 @@
         
     </div>
 
-    ";
-    ?>
+    
     <!-- Display Schedule -->
-    <div id="Schedule" class="tabcontent">
+    <div id=\"Schedule\" class=\"tabcontent\">
         <h1>Schedule</h1>
         <p>Schedule table will go here.</p>
     </div>
-
+   
+    
+";
+    ?>
     <!-- Display Games -->
     <div id="Games" class="tabcontent">
         <h1>Games</h1>
@@ -122,10 +138,50 @@
 
     <!-- Display Team information -->
     <div id="Team" class="tabcontent">
-        <h1>Team</h1>
         <?php
-        if ($leader_has_team){ // Display Team table
-            echo "Display Team Table here, use leader team id to get Team information from db";
+        if ($leader_has_team) { // Display Team table
+            echo "
+<!--        <div id=\"Team\" class=\"tabcontent\"> -->
+        <h1 class='flip-bolder'>Team</h1>
+
+        <div class=\"flip-col l6 space-l-3 m6 space-m-3 s10 space-s-1\">
+            <table class=\"flip-table flip-striped flip-white\">
+            <tr>
+                <td><i class=\"fa fa-user flip-text-blue-499 flip-large\"></i></td>
+                <td>Name:</td>
+                <td>$fName &nbsp  $lName</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class=\"fa fa-id-card flip-text-deep-blue-499 flip-large\"></i></td>
+                <td>Username:</td>
+                <td><i>$username</i></td>
+                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
+            </tr>
+            <tr>
+                <td><i class=\"fa fa-envelope flip-text-deep-blue-499  flip-large\"></i></td>
+                <td>Email:</td>
+                <td>$email</td>
+                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
+            </tr>
+            <tr>
+                <td><i class=\"fa fa-mobile flip-text-deep-blue-499  flip-xlarge\"></i></td>
+                <td>Phone:</td>
+                <td><i>$phone</i></td>
+                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
+            </tr>
+            <tr>
+                <td><i class=\"fa fa-trophy flip-text-deep-blue-499  flip-large\"></i></td>
+                <td>Team:</td>
+                <td><i>$leaderTeam</i></td>
+                <td></td>
+            </tr>
+            </table>
+        </div>
+
+    </div>
+        
+        ";
         } else { // Display registration
             echo "
                 <p class='flip-clear flip-small flip-bold'>Select sport to sign up your Team. </p>
@@ -139,7 +195,10 @@
                 </div>
                 <!-- ---------------------- End of icon link portion ------------------------ -->
                 ";
-        } ?>
+        }
+
+
+        ?>
 
 
     </div>
@@ -152,10 +211,16 @@
     <div class="flip-content flip-margin-right">
         <div class="flip-twothird flip-padding">
             <h1>League Information</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.</h5>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
 
@@ -175,10 +240,16 @@
 
         <div class="flip-twothird">
             <h1>Volleyball</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.</h5>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
     </div>
@@ -213,7 +284,7 @@
         }
     }
 
-    function openDescription(leaderNav,elmnt,color) {
+    function openDescription(leaderNav, elmnt, color) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -230,6 +301,7 @@
         elmnt.style.color = 'black';
 
     }
+
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 </script>
