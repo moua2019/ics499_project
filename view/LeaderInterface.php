@@ -54,7 +54,8 @@ echo "<Br><br><br> Player array length:" . sizeof($playerArray);
 foreach ($playerArray as $plyr) {
     echo "Testing 2";
     echo "<br><br><br>Player: " . $plyr->getPlyrFname() . " " . $plyr->getPlyrLname() . " " . $plyr->getPlyrTshirtNumber()  . " " .  $plyr->getPlyrPhone() . " " . $plyr->getPlyrPosition() . "<br>" ;
- }
+    echo "Player: " . $plyr;
+}
 
     // Leader array is composed by First Name, Last Name, Username, Email, Phone, TeamId.
     $fName = $leaderInfoArray[0];

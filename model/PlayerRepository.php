@@ -35,6 +35,41 @@ class PlayerRepository extends DataBaseConnection implements RepositoryInterface
     }
 
     /**
+     * @param $rosterID
+     * @return mixed  Array of Player type objects
+     */
+    public function getAllPlayersByRosterId($rosterID)
+    {
+        $emptyStr = "";
+        if (!empty($rosterID)) {
+            // Get leader from database
+            $stmt = $this->getDbc()->prepare("SELECT * FROM Player WHERE roster_id = ?");
+
+            // Execute statement
+            $stmt->execute([$rosterID]);
+
+            // Return user if exists
+            if ($stmt->rowCount()) {
+                $playerArray = array();
+                while ($row = $stmt->fetch()) {
+                    $playerArray[] = new Player($row['player_id'], $row['player_firstName'], $row['player_lastName'], $row['player_phone'], $row['tshirt_number'], $row['position'], $row['roster_id']);
+
+                }
+
+                return $playerArray;
+
+
+            } else {
+                return $emptyStr;
+            }
+
+        } else {
+            return $emptyStr;
+        }
+
+    }
+
+    /**
      * @param String $userName It is looked by PlayerId (username = playerId
      * @return mixed return UserInterface
      */
