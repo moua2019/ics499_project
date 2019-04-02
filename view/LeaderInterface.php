@@ -16,7 +16,7 @@
     include "Header.php";
     include "Navigation.php";
     include_once "../utilities/FormatPhone.php";
-    include "../controller/UserController.php";
+    include_once "../controller/UserController.php";
 
     // Instantiate respective classes
     $controllerObj = new UserController();

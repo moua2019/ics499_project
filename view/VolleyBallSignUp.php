@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
     include "Header.php";
     include "Logo.php";
     include "../controller/UserController.php";
-    include "../utilities/CleanData.php";
+    include_once "../utilities/CleanData.php";
 
     // To display sign up error message to user
     $signup_error_msg = "";

@@ -107,35 +107,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 } // End of Request POST
 
 echo"
-    <div class=\"flip-content flip-container flip-centered flip-col l4 space-l-4 m6 space-m-3 flip-card-4 flip-margin-bottom flip-padding-large\" >
+    <div class=\"flip-content flip-container flip-centered flip-col l4 space-l-4 m6 space-m-3 flip-card-4 flip-margin-bottom\" >
         <div class=\"flip-container flip-col l12 m12 s12\">
             <h2 class='flip-center'>Sign Up</h2>
             <p class='flip-small flip-text-red'>$signup_error_msg</p>
             <form action='LeaderSignUp.php' method='post' >
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"First Name\" name=\"fName\" required='required'>
-                </div>
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Last Name\" required name=\"lName\" >
-                </div>
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Username\" required name=\"userName\" > 
-                </div>
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"password\" placeholder=\"Password\" required name=\"pwd\">
-                </div>
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"email\" placeholder=\"Email\" required name=\"email\" >
-                </div>
-                <div class=\"flip-margin-top\">
-                    <input class=\"flip-input flip-padding-small flip-border\" type=\"tel\" maxlength=\"10\" placeholder=\"Phone\"  name=\"phone\" >
-                </div>
-                <div class=\"flip-center flip-margin-top\">
-                    <button class=\"flip-hover-green flip-black flip-padding\" type=\"submit\" name=\"register\" value=\"signup\">SIGN UP</button>
-                </div>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"First Name\" name=\"fName\" ></p>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Last Name\" required name=\"lName\" ></p>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"text\" placeholder=\"Username\" required name=\"userName\" ></p>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"password\" placeholder=\"Password\" required name=\"pwd\"></p>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"email\" placeholder=\"Email\" required name=\"email\" ></p>
+                <p><input class=\"flip-input flip-padding-small flip-border\" type=\"tel\" maxlength=\"10\" placeholder=\"Phone\"  name=\"phone\" ></p>
+                <p><button class=\"flip-hover-green flip-black flip-padding\" style='text-align: center; max-width: 60%!important; margin-left: 30%' type=\"submit\" name=\"register\" value=\"signup\">SIGN UP</button></p>
             </form>
-            <div class=\"flip-margin-bottom flip-margin-top\">
-                <a class='flip-small flip-bar-item flip-hover-text-green flip-left flip-animate-right' href='Home.php' style='text-decoration: none !important'> Return Home</a>
+            <div class=\"flip-padding-small flip-margin-bottom \">
+                <a class='flip-small flip-bar-item flip-hover-text-green flip-left flip-animate-right' href='Home.php' style='text-decoration: none !important'> Return to home page</a>
                 <a class='flip-small flip-bar-item flip-hover-text-green flip-right flip-animate-left'  style='text-decoration: none !important'href='SignIn.php'> Sign In</a>
             </div>
         </div>
