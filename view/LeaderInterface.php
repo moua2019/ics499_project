@@ -46,20 +46,28 @@ if (isset($_SESSION['leader_has_Team'])) {
 // Getting Leader information
 $leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
 
+// Leader array is composed by First Name, Last Name, Username, Email, Phone, TeamId.
+$fName = $leaderInfoArray[0];
+$lName = $leaderInfoArray[1];
+$username = $leaderInfoArray[2];
+$email = $leaderInfoArray[3];
+$tempPhone = $leaderInfoArray[4];
+$teamId = $leaderInfoArray[5];
+
 // Getting Player information
 $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
 
 
-    // Get Team Name using teamId
-    $leaderTeam = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
+// Get Team Name using teamId
+$leaderTeam = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
 
-    // Format phone number if not empty
-    if (empty($tempPhone)) {
-        $phone = "N/A";
-    } else {
-        $phoneFormatObj->setFormattedNumber($tempPhone);
-        $phone = $phoneFormatObj->getFormattedNumber();
-    }
+// Format phone number if not empty
+if (empty($tempPhone)) {
+    $phone = "N/A";
+} else {
+    $phoneFormatObj->setFormattedNumber($tempPhone);
+    $phone = $phoneFormatObj->getFormattedNumber();
+}
 ?>
 
 <!-- Header -->
@@ -126,10 +134,10 @@ $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
     <div id="Team" class="tabcontent">
         <?php
         if (!empty($leaderTeamId)){ // Display Team table
-        $playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
+            $playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
 
-        if (sizeof($playerArray) > 0) {
-            echo "
+            if (sizeof($playerArray) > 0) {
+                echo "
                 <!-- Player table display start here -->
                 <div class=\"flip-col\">
                 <table class=\"flip-table flip-striped flip-white\">
@@ -151,15 +159,15 @@ $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
                         <th></th>
                     </tr>
             ";
-            foreach ($playerArray as $plyr) {// Format phone number if not empty
+                foreach ($playerArray as $plyr) {// Format phone number if not empty
 
-                if (empty($plyr->getPlyrPhone())) {
-                    $player_phone = "N/A";
-                } else {
-                    $phoneFormatObj->setFormattedNumber($plyr->getPlyrPhone());
-                    $player_phone = $phoneFormatObj->getFormattedNumber();
-                }
-                echo "
+                    if (empty($plyr->getPlyrPhone())) {
+                        $player_phone = "N/A";
+                    } else {
+                        $phoneFormatObj->setFormattedNumber($plyr->getPlyrPhone());
+                        $player_phone = $phoneFormatObj->getFormattedNumber();
+                    }
+                    echo "
                     <tr class='flip-hover-light-blue'>
                         <!--<td><i class=\"fa fa-user flip-text-blue-499 flip-large\"></i></td>-->
                         <td class='flip-margin-left'>" . $plyr->getPlyrFname() . "</td>
@@ -170,15 +178,15 @@ $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
                         <td><span class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</span></td>
                     </tr>
                 ";
-            }
-            echo "
+                }
+                echo "
              
                 </table>
             </div>
             "; // End of displaying Player Table
-        } else {
-            echo "<h3 class='flip-bold'>No Players found on this Roster.";
-        }
+            } else {
+                echo "<h3 class='flip-bold'>No Players found on this Roster.";
+            }
             echo "
     </div> <!-- End of <div id=\"Team\" class=\"tabcontent\"> -->
         
