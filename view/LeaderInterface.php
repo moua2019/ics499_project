@@ -54,13 +54,17 @@ $email = $leaderInfoArray[3];
 $tempPhone = $leaderInfoArray[4];
 $teamId = $leaderInfoArray[5];
 
+// Sport Type
+$tempSportType = $controllerObj->getRosterSportType($teamId);
+$sportType = is_null($tempSportType) ? "N/A" : $tempSportType;
+
+echo "<br><br><br><br>Sport Type: $sportType";
 
 // Getting Player information
 $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
 
-
 // Get Team Name using teamId
-$leaderTeam = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
+$leaderTeamName = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
 
 // Format phone number if not empty
 if (empty($tempPhone)) {
@@ -107,7 +111,7 @@ if (empty($tempPhone)) {
                 <tr>
                     <td><i class=\"fa fa-trophy flip-text-deep-blue-499  flip-large\"></i></td>
                     <td>Team:</td>
-                    <td><i>$leaderTeam</i></td>
+                    <td><i>$leaderTeamName</i></td>
                     <td></td>
                 </tr>
             </table>
@@ -136,6 +140,7 @@ if (empty($tempPhone)) {
         <?php
         if (!empty($leaderTeamId)){ // Display Team table
             $playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
+            $sportTypeIconName = strtolower($sportType) . "-ball.jpeg";
 
             if (sizeof($playerArray) > 0) {
                 echo "
@@ -144,10 +149,14 @@ if (empty($tempPhone)) {
                 <table class=\"flip-table flip-striped flip-white\">
                     <thead>
                         <tr>
-                            <th colspan=\"7\" class=\"flip-center flip-green flip-xlarge \">$leaderTeam</th>
+                            <th class=\"flip-center flip-green\"></th> <!-- Nothing is displayed in this cell -->
+                            <th colspan=\"4\" class=\"flip-center flip-green flip-xlarge \">$leaderTeamName</th>
+                            <th rowspan='2' class='flip-green flip-center flip-margin-top'>
+                                <img class=\"flip-circle flip-card-4 flip-icon-image\" src=\"../images/$sportTypeIconName\" alt=\"Volleyball Ball \" >
+                            </th>
                         </tr>
                         <tr>
-                            <th colspan=\"7\" class=\"flip-large flip-green flip-border-bottom\">Leader: &emsp;<span class='flip-text-deep-blue-499 flip-large'>$fName &emsp;$lName<span></span></th>
+                            <th colspan=\"5\" class=\"flip-large flip-green \">Leader: &emsp;<span class='flip-text-deep-blue-499 flip-large'>$fName &nbsp;$lName<span></span></th>
                         </tr>
                         
                     </thead>
