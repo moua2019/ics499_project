@@ -58,8 +58,6 @@ $teamId = $leaderInfoArray[5];
 $tempSportType = $controllerObj->getRosterSportType($teamId);
 $sportType = is_null($tempSportType) ? "N/A" : $tempSportType;
 
-echo "<br><br><br><br>Sport Type: $sportType";
-
 // Getting Player information
 $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
 
