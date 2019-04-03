@@ -69,25 +69,69 @@ class UserController
         $rosterRepo = new RosterRepository();
         $roster = new Roster($roster_id, $name, $numbOfPlayers, $sport, $leader_id);
 
-        $isValid = false;
+        $isRosterAdded = false;
 
         // Add  Roster to db
         if ($rosterRepo->addRoster($roster)) {
-            $isValid = true;
-        }
-
-        // Add Players
-        if ($this->addPlayerArrayToDb($playerArray, $roster_id)) {
-            $isValid = true;
-        }
-
-        // If Roster registration succeed, add roster_id to leader table
-        if ($this->updateLeaderRosterId($leader_id, $roster_id)){
-            $isValid = true;
+            // Add Players
+            if ($this->addPlayerArrayToDb($playerArray, $roster_id)) {
+                // If Roster registration succeed, add roster_id to leader table
+                if ($this->updateLeaderRosterId($leader_id, $roster_id)){
+                    $isRosterAdded = true;
+                }
+            }
         }
 
         // Redirect User
-        return $isValid ?  '../view/LeaderInterface.php' : '../view/VolleyballRosterRegistration.php' ;
+        return $isRosterAdded ?  '../view/LeaderInterface.php' : '../view/VolleyballRosterRegistration.php' ;
+    }
+
+
+    /**
+     * @param $rosterID
+     * @return string|null Roster Name if Roster is found, null otherwise
+     */
+    public function getRosterName($rosterID)
+    {
+        if (!empty($rosterID)){
+            $roster = $this->getRosterById($rosterID);
+
+            return is_null($roster) ? null : $roster->getRosterName();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $rosterID Roster id used to look for Roster
+     * @return Roster|null Roster if it is found, null otherwise
+     */
+    public function getRosterById($rosterID)
+    {
+        if (!empty($rosterID)){
+
+            $rosterRepo = new RosterRepository();
+
+            return $rosterRepo->getRosterByRosterId($rosterID);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $rosterID String used to look for Roster.
+     * @return String|null Sport type if Roster exists, null otherwise
+     */
+    public function getRosterSportType($rosterID)
+    {
+        if (!empty($rosterID)){
+
+            $rosterRepo = new RosterRepository();
+
+            return $rosterRepo->getSportType($rosterID);
+        } else {
+            return null;
+        }
     }
 
 
@@ -221,7 +265,6 @@ class UserController
      * @return string Name of the Roster
      */
     public function getTeamNameByRosterId($rosterId){
-        //TODO: get data from team table. For now return Team in Process
         if (!empty($rosterId)){
             $rosterRepo = new RosterRepository();
 
@@ -230,8 +273,10 @@ class UserController
             $teamName = !empty($roster) ? $roster->getRosterName() : "No Team Name Found";
 
             return $teamName;
+        } else {
+            return null;
         }
-        return "--Getting Team Name in Process--";
+
     }
 
     /**

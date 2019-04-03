@@ -15,6 +15,9 @@ include_once "DataBaseConnection.php";
 include_once "RepositoryInterface.php";
 include "Roster.php";
 
+/**
+ * Class RosterRepository
+ */
 class RosterRepository extends DataBaseConnection
 {
 
@@ -39,7 +42,6 @@ class RosterRepository extends DataBaseConnection
      */
     public function getRosterByRosterName($rosterName)
     {
-        $roster = "";
         if (!empty($rosterName)) {
             // Get Roster from database
             $stmt = $this->getDbc()->prepare("SELECT * FROM Roster WHERE roster_name = ?");
@@ -50,36 +52,45 @@ class RosterRepository extends DataBaseConnection
             // Return user if exists
             if ($stmt->rowCount()) {
                 while ($row = $stmt->fetch()) {
-                    $roster = new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
-
+                    return new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
                 }
-
-                return $roster;
-
-            } else {
-                return $roster;
             }
-
-        } else {
-            return $roster;
         }
+
+        return null; // return null if rosterName is empty
+
     }
 
     /**
-     * @return mixed Return all Rosters existing in database
+     * @return array|null Array of Roster objects if there are Roster in db, null otherwise.
      */
     public function getRosters()
     {
-        // TODO: Implement getUsers() method.
+        // Roster array
+        $rosterArray = array();
+
+        // Get Rosters from database
+        $stmt = $this->getDbc()->prepare("SELECT * FROM Roster");
+
+        // Execute statement
+        $stmt->execute();
+
+        // Return user if exists
+        if ($stmt->rowCount()) {
+            while ($row = $stmt->fetch()) {
+                $rosterArray[] = new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
+            }
+            return $rosterArray;
+        }
+        return null; // If Roster table has no Rosters, return null.
     }
 
     /**
-     * @param $rosterId
-     * @return mixed Roster object if $rosterId is not empty, empty string otherwise
+     * @param $rosterId String used to get Roster from database.
+     * @return Roster|null Roster object if Roster is found, null otherwise
      */
-    public function getRosterByRosterId ($rosterId)
+    public function getRosterByRosterId($rosterId)
     {
-        $roster = "";
         if (!empty($rosterId)){
             // Get Roster from database
             $stmt = $this->getDbc()->prepare("SELECT * FROM Roster WHERE roster_id = ?");
@@ -90,15 +101,32 @@ class RosterRepository extends DataBaseConnection
             // Return user if exists
             if ($stmt->rowCount()) {
                 while ($row = $stmt->fetch()) {
-                    $roster = new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
-
+                    return new Roster($row['roster_id'], $row['roster_name'],$row['number_of_players'],$row['sport_type'],$row['leader_id']);
                 }
-
-                return $roster;
-
             } else {
-                return $roster;
+                return null;
             }
         }
+
+        return null; // If rosterID is empty
     }
+
+    /**
+     * @param $rosterID String used to get Roster from database.
+     * @return string|null Sport type if roster exists, null otherwise
+     */
+    public function getSportType($rosterID)
+    {
+        if (!empty($rosterID)){
+            $roster = $this->getRosterByRosterId($rosterID);
+            if (is_null($roster)){
+                return null;
+            } else {
+                return $roster->getSportType();
+            }
+        }
+
+        return null;
+    }
+
 } // End of RosterRepository class.
