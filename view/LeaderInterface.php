@@ -48,21 +48,7 @@ $leaderInfoArray = $controllerObj->getLeaderInfo($_SESSION['username']);
 
 // Getting Player information
 $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
-$playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
 
-echo "<Br><br><br> Player array length:" . sizeof($playerArray);
-foreach ($playerArray as $plyr) {
-    echo "Testing 2";
-    echo "<br><br><br>Player: " . $plyr->getPlyrFname() . " " . $plyr->getPlyrLname() . " " . $plyr->getPlyrTshirtNumber()  . " " .  $plyr->getPlyrPhone() . " " . $plyr->getPlyrPosition() . "<br>" ;
-}
-
-    // Leader array is composed by First Name, Last Name, Username, Email, Phone, TeamId.
-    $fName = $leaderInfoArray[0];
-    $lName = $leaderInfoArray[1];
-    $username = $leaderInfoArray[2];
-    $email = $leaderInfoArray[3];
-    $tempPhone = $leaderInfoArray[4];
-    $teamId = $leaderInfoArray[5];
 
     // Get Team Name using teamId
     $leaderTeam = !empty($teamId) ? $controllerObj->getTeamNameByRosterId($teamId) : "No Team";
@@ -139,47 +125,62 @@ foreach ($playerArray as $plyr) {
     <!-- Display Team information -->
     <div id="Team" class="tabcontent">
         <?php
-        if ($leader_has_team) { // Display Team table
+        if (!empty($leaderTeamId)){ // Display Team table
+        $playerArray = $playerCtrlObj->getAllPlayersByRosterId($leaderTeamId);
+
+        if (sizeof($playerArray) > 0) {
             echo "
-<!--        <div id=\"Team\" class=\"tabcontent\"> -->
-        <h1 class='flip-bolder'>Team</h1>
+                <!-- Player table display start here -->
+                <div class=\"flip-col\">
+                <table class=\"flip-table flip-striped flip-white\">
+                    <thead>
+                        <tr>
+                            <th colspan=\"7\" class=\"flip-center flip-green flip-xlarge \">$leaderTeam</th>
+                        </tr>
+                        <tr>
+                            <th colspan=\"7\" class=\"flip-large flip-green flip-border-bottom\">Leader: &emsp;<span class='flip-text-deep-blue-499 flip-large'>$fName &emsp;$lName<span></span></th>
+                        </tr>
+                        
+                    </thead>
+                    <tr class='flip-bolder flip-medium flip-border-bottom '>
+                        <th class='flip-margin-left'>First Name</th>
+                        <th>Last Name</th>
+                        <th class='flip-center'>T-shirt #</th>
+                        <th class='flip-center'>Phone</th>
+                        <th class='flip-margin-left'>Position</th>
+                        <th></th>
+                    </tr>
+            ";
+            foreach ($playerArray as $plyr) {// Format phone number if not empty
 
-        <div class=\"flip-col l6 space-l-3 m6 space-m-3 s10 space-s-1\">
-            <table class=\"flip-table flip-striped flip-white\">
-            <tr>
-                <td><i class=\"fa fa-user flip-text-blue-499 flip-large\"></i></td>
-                <td>Name:</td>
-                <td>$fName &nbsp  $lName</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i class=\"fa fa-id-card flip-text-deep-blue-499 flip-large\"></i></td>
-                <td>Username:</td>
-                <td><i>$username</i></td>
-                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
-            </tr>
-            <tr>
-                <td><i class=\"fa fa-envelope flip-text-deep-blue-499  flip-large\"></i></td>
-                <td>Email:</td>
-                <td>$email</td>
-                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
-            </tr>
-            <tr>
-                <td><i class=\"fa fa-mobile flip-text-deep-blue-499  flip-xlarge\"></i></td>
-                <td>Phone:</td>
-                <td><i>$phone</i></td>
-                <td><i class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</i></td>
-            </tr>
-            <tr>
-                <td><i class=\"fa fa-trophy flip-text-deep-blue-499  flip-large\"></i></td>
-                <td>Team:</td>
-                <td><i>$leaderTeam</i></td>
-                <td></td>
-            </tr>
-            </table>
-        </div>
-
-    </div>
+                if (empty($plyr->getPlyrPhone())) {
+                    $player_phone = "N/A";
+                } else {
+                    $phoneFormatObj->setFormattedNumber($plyr->getPlyrPhone());
+                    $player_phone = $phoneFormatObj->getFormattedNumber();
+                }
+                echo "
+                    <tr class='flip-hover-light-blue'>
+                        <!--<td><i class=\"fa fa-user flip-text-blue-499 flip-large\"></i></td>-->
+                        <td class='flip-margin-left'>" . $plyr->getPlyrFname() . "</td>
+                        <td>" . $plyr->getPlyrLname() . "</td>
+                        <td class='flip-center'>" . $plyr->getPlyrTshirtNumber() . "</td>
+                        <td class='flip-center'>" . $player_phone . "</td>
+                        <td class=''>" . ucwords($plyr->getPlyrPosition()) . " </td>
+                        <td><span class=\"flip-button flip-tiny flip-hover-red flip-round-medium\">Edit</span></td>
+                    </tr>
+                ";
+            }
+            echo "
+             
+                </table>
+            </div>
+            "; // End of displaying Player Table
+        } else {
+            echo "<h3 class='flip-bold'>No Players found on this Roster.";
+        }
+            echo "
+    </div> <!-- End of <div id=\"Team\" class=\"tabcontent\"> -->
         
         ";
         } else { // Display registration
@@ -187,10 +188,12 @@ foreach ($playerArray as $plyr) {
                 <p class='flip-clear flip-small flip-bold'>Select sport to sign up your Team. </p>
                 
                 <!-- ---- To add new icon copy this portion and make changes accordingly ---- -->
-                <div class=\"flip-icon-container flip-col l1 flip-center space-l-5-half space-m-5-half\">
-                    <img class=\"flip-circle flip-card-4 flip-icon-image\" src=\"../images/volleball-ball.jpeg\"  alt=\"Volleyball ball\"></a>
-                    <div class=\"flip-icon-middle\">
-                        <a href=\"VolleyBallSignUp.php\" class=\"flip-icon-middle-text\">Sign Up</a>
+                <div class=\"flip-center\">
+                    <div class=\"flip-icon-container\">
+                        <img class=\"flip-circle flip-card-4 flip-icon-image\" src=\"../images/volleball-ball.jpeg\"  alt=\"Volleyball ball\"></a>
+                        <div class=\"flip-icon-middle\">
+                            <a href=\"VolleyBallSignUp.php\" class=\"flip-icon-middle-text\">Sign Up</a>
+                        </div>
                     </div>
                 </div>
                 <!-- ---------------------- End of icon link portion ------------------------ -->
