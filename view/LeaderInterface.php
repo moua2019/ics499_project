@@ -54,6 +54,7 @@ $email = $leaderInfoArray[3];
 $tempPhone = $leaderInfoArray[4];
 $teamId = $leaderInfoArray[5];
 
+
 // Getting Player information
 $leaderTeamId = $controllerObj->getLeaderTeamId($_SESSION['username']);
 
