@@ -89,7 +89,7 @@ if (empty($tempPhone)) {
     <!-- Display Schedule -->
     <div id="Schedule" class="tabcontent">
         <h1>Schedule</h1>
-        <p>Schedule table will go here.</p>
+        <a href="http://localhost/ics499_project/schedule/">Link here</a>
     </div>
 
     <!-- Display Games -->
@@ -118,18 +118,9 @@ if (empty($tempPhone)) {
      style="text-align: justify;text-justify: inter-word;">
     <div class="flip-content flip-margin-right">
         <div class="flip-twothird flip-padding">
-            <h1>League Information</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h1>Welcome to the Administrator Page!</h1>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="flip-text-grey">Here you will be able to monitor the league registration system.</p>
         </div>
 
         <div class="flip-third flip-center flip-margin\">
@@ -148,17 +139,9 @@ if (empty($tempPhone)) {
 
         <div class="flip-twothird">
             <h1>Volleyball</h1>
-            <h5 class="flip-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="flip-padding-32">Updates:</h5>
 
-            <p class="flip-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="flip-text-grey">Summer classes start soon!</p>
         </div>
     </div>
 </div>

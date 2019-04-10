@@ -64,8 +64,8 @@ if ($_POST["register"] === "signup") {
         }
 
         // Player Last Name
-        if (!empty($trimPlyrLnameArray[$i])) {
-            $last_name = $cleanup_object->getVarClean($trimPlyrLnameArray[$i]);
+        if (!empty($trimPlyrFnameArray[$i])) {
+            $last_name = $cleanup_object->getVarClean($trimPlyrFnameArray[$i]);
         } else {
             $last_name = false;
             $signupErrorArr[] = "Last Name cannot be empty";
